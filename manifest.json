@@ -1,0 +1,11 @@
+{
+  "name": "Medical Hub",
+  "short_name": "MedHub",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1abc9c",
+  "icons": [
+    {
+      "src": "https://upload.wikimedia.org/wikipedia/commons/7/71/Flag_of
+      
