@@ -1,89 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Medical Hub — Vibrant Learning</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    :root{
-      --bg1:#ff9a9e;--bg2:#fad0c4;--bg3:#fbc2eb;--bg4:#a6c1ee;
-      --card:#ffffff;--text:#28323b;--muted:#5c6b77;--border:#ebedf3;
-      --g1:#ff6a00;--g2:#ee0979;--g3:#43cea2;--g4:#185a9d;--g5:#ffd166;--g6:#06beb6;--g7:#48c6ef;--g8:#6f86d6;
-    }
-    *{box-sizing:border-box}
-    html,body{
-      margin:0;padding:0;font-family:Poppins,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--text);
-      background:linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3),var(--bg4));
-      background-size:400% 400%;animation:bgMove 20s ease infinite;
-    }
-    @keyframes bgMove{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-    header{position:sticky;top:0;z-index:50;background:linear-gradient(90deg,var(--g1),var(--g2));color:#fff;box-shadow:0 8px 18px rgba(0,0,0,0.25)}
-    .nav{max-width:1200px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:8px}
-    .brand{font-weight:800;letter-spacing:0.3px;display:flex;align-items:center;gap:10px}
-    .logo{width:36px;height:36px;border-radius:12px;background:conic-gradient(from 180deg,var(--g1),var(--g2),var(--g3),var(--g4),var(--g1));box-shadow:0 0 24px rgba(255,255,255,0.4)}
-    .actions{display:flex;gap:8px;flex-wrap:wrap}
-    .btn{border:none;padding:10px 14px;border-radius:999px;font-weight:700;cursor:pointer;transition:transform .12s ease,box-shadow .2s ease}
-    .btn-primary{background:linear-gradient(135deg,var(--g7),var(--g8));color:#fff}
-    .btn-outline{background:#ffffff22;color:#fff;border:1px solid #ffffff55}
-    .btn:active{transform:scale(0.97);box-shadow:0 0 0 4px rgba(255,255,255,0.25)}
-    .container{max-width:1200px;margin:0 auto;padding:16px}
-    .hero{display:grid;grid-template-columns:1.05fr .95fr;gap:16px;margin-top:12px}
-    @media (max-width:900px){.hero{grid-template-columns:1fr}}
-    .hero-card{background:#ffffffcc;border:1px solid var(--border);border-radius:18px;padding:18px;backdrop-filter:blur(4px)}
-    h1{margin:0 0 8px;font-size:26px}
-    .subtitle{color:var(--muted)}
-    .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
-    .chip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--border);padding:8px 10px;border-radius:999px;background:#fff}
-    .search-wrap{display:flex;gap:8px;margin-top:12px}
-    .search{flex:1;padding:10px 12px;border-radius:12px;border:1px solid var(--border)}
-    .filters{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
-    .filter{padding:8px 10px;border-radius:999px;border:1px solid var(--border);background:#fff;cursor:pointer;font-weight:600}
-    .highlight{border:2px dashed var(--border);border-radius:18px;padding:14px;background:#fff}
-    .grid{display:grid;gap:14px;margin-top:18px;grid-template-columns:repeat(4,1fr)}
-    @media (max-width:1200px){.grid{grid-template-columns:repeat(3,1fr)}}
-    @media (max-width:860px){.grid{grid-template-columns:repeat(2,1fr)}}
-    @media (max-width:560px){.grid{grid-template-columns:1fr}}
-    .card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:10px;min-height:220px;box-shadow:0 6px 16px rgba(0,0,0,0.15);transition:transform .18s ease}
-    .card:hover{transform:translateY(-2px)}
-    .card h3{margin:0;font-size:18px;background:linear-gradient(90deg,var(--g1),var(--g2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-    .badges{display:flex;gap:6px;flex-wrap:wrap}
-    .badge{font-size:12px;padding:6px 8px;border-radius:999px;border:1px solid var(--border);background:#fafbff}
-    .accordion details{border:1px solid var(--border);border-radius:12px;padding:8px;background:#fafbff}
-    .accordion summary{cursor:pointer;font-weight:700}
-    .files{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
-    .file{display:inline-flex;align-items:center;gap:6px;padding:8px 10px;border:1px solid var(--border);border-radius:10px;background:#fff;text-decoration:none;color:var(--text);font-weight:600}
-    .file:hover{box-shadow:0 4px 10px rgba(0,0,0,0.1)}
-    .cta-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto}
-    .link-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 12px;border-radius:999px;border:1px solid var(--border);background:linear-gradient(135deg,var(--g3),var(--g4));color:#fff;text-decoration:none;font-weight:700}
-    .link-btn.secondary{background:linear-gradient(135deg,var(--g5),var(--g1))}
-    .uploadBtn{background:linear-gradient(135deg,var(--g6),#0bbcd6)}
-    .hide{display:none !important}
-    footer{margin-top:24px;background:linear-gradient(90deg,var(--g3),var(--g4));color:#fff;padding:14px;text-align:center}
-    /* Modal */
-    #signinModal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:999;align-items:center;justify-content:center}
-    #signinModal .box{background:#fff;padding:20px;border-radius:16px;max-width:420px;width:92%;box-shadow:0 10px 24px rgba(0,0,0,0.25)}
-    #signinModal input{width:100%;padding:10px;border-radius:10px;border:1px solid var(--border);margin-bottom:10px}
-    #signinModal button{width:100%;padding:12px;border:none;border-radius:12px;background:linear-gradient(135deg,var(--g7),var(--g8));color:#fff;font-weight:800}
-    .signed{font-size:12px;margin-left:8px;opacity:0.9}
-    .amh{color:#185a9d;font-weight:700}
-  </style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Medical Hub — Vibrant Learning (Functional)</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg1:#ff9a9e;--bg2:#fad0c4;--bg3:#fbc2eb;--bg4:#a6c1ee;
+    --text:#28323b;--muted:#5c6b77;--border:#ebedf3;
+    --g1:#ff6a00;--g2:#ee0979;--g3:#43cea2;--g4:#185a9d;--g5:#ffd166;--g6:#06beb6;--g7:#48c6ef;--g8:#6f86d6;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;font-family:Poppins,system-ui,Segoe UI,Roboto,Arial;color:var(--text);
+    background:linear-gradient(135deg,var(--bg1),var(--bg2),var(--bg3),var(--bg4));background-size:400% 400%;animation:bgMove 18s ease infinite}
+  @keyframes bgMove{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+  header{position:sticky;top:0;z-index:50;background:linear-gradient(90deg,var(--g1),var(--g2));color:#fff;box-shadow:0 8px 18px rgba(0,0,0,0.25)}
+  .nav{max-width:1100px;margin:0 auto;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+  .brand{font-weight:800;display:flex;align-items:center;gap:10px}
+  .logo{width:34px;height:34px;border-radius:12px;background:conic-gradient(from 180deg,var(--g1),var(--g2),var(--g3),var(--g4),var(--g1))}
+  .signed{font-size:12px;margin-left:8px;opacity:0.9}
+  .btn{border:none;padding:10px 14px;border-radius:999px;font-weight:700;cursor:pointer;transition:transform .12s ease,box-shadow .2s ease}
+  .btn-primary{background:linear-gradient(135deg,var(--g7),var(--g8));color:#fff}
+  .btn-outline{background:#ffffff22;color:#fff;border:1px solid #ffffff55}
+  .btn:active{transform:scale(0.97);box-shadow:0 0 0 4px rgba(255,255,255,0.25)}
+  .container{max-width:1100px;margin:0 auto;padding:16px}
+  .hero{display:grid;grid-template-columns:1.05fr .95fr;gap:16px;margin-top:12px}
+  @media (max-width:900px){.hero{grid-template-columns:1fr}}
+  .card-hero{background:#ffffffcc;border:1px solid var(--border);border-radius:18px;padding:18px;backdrop-filter:blur(4px)}
+  h1{margin:0 0 8px;font-size:24px}
+  .subtitle{color:var(--muted)}
+  .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+  .chip{padding:8px 10px;border-radius:999px;border:1px solid var(--border);background:#fff}
+  .search-wrap{display:flex;gap:8px;margin-top:10px}
+  .search{flex:1;padding:10px 12px;border-radius:12px;border:1px solid var(--border)}
+  .filters{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+  .filter{padding:8px 10px;border-radius:999px;border:1px solid var(--border);background:#fff;cursor:pointer;font-weight:600}
+  .highlight{border:2px dashed var(--border);border-radius:18px;padding:14px;background:#fff}
+  .grid{display:grid;gap:14px;margin-top:18px;grid-template-columns:repeat(3,1fr)}
+  @media (max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:600px){.grid{grid-template-columns:1fr}}
+  .card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:8px;min-height:220px;box-shadow:0 6px 16px rgba(0,0,0,0.15);transition:transform .18s ease}
+  .card:hover{transform:translateY(-2px)}
+  .card h3{margin:0;font-size:18px;background:linear-gradient(90deg,var(--g1),var(--g2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+  .amh{color:#185a9d;font-weight:700}
+  .badges{display:flex;gap:6px;flex-wrap:wrap}
+  .badge{font-size:12px;padding:6px 8px;border-radius:999px;border:1px solid var(--border);background:#fafbff}
+  .accordion details{border:1px solid var(--border);border-radius:12px;padding:8px;background:#fafbff}
+  .accordion summary{cursor:pointer;font-weight:700}
+  .files{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+  .file{display:inline-flex;align-items:center;gap:6px;padding:8px 10px;border:1px solid var(--border);border-radius:10px;background:#fff;text-decoration:none;color:var(--text);font-weight:600}
+  .file:hover{box-shadow:0 4px 10px rgba(0,0,0,0.1)}
+  .cta-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto}
+  .link-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 12px;border-radius:999px;border:1px solid var(--border);background:linear-gradient(135deg,var(--g3),var(--g4));color:#fff;text-decoration:none;font-weight:700}
+  .link-btn.secondary{background:linear-gradient(135deg,var(--g5),var(--g1))}
+  .uploadBtn{background:linear-gradient(135deg,var(--g6),#0bbcd6)}
+  .hide{display:none !important}
+  footer{margin-top:24px;background:linear-gradient(90deg,var(--g3),var(--g4));color:#fff;padding:14px;text-align:center}
+  /* Modals */
+  .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:999;align-items:center;justify-content:center}
+  .modal .box{background:#fff;padding:18px;border-radius:16px;max-width:420px;width:92%;box-shadow:0 10px 24px rgba(0,0,0,0.25)}
+  .modal input, .modal select, .modal textarea{width:100%;padding:10px;border-radius:10px;border:1px solid var(--border);margin-bottom:10px}
+  .modal button{width:100%;padding:12px;border:none;border-radius:12px;background:linear-gradient(135deg,var(--g7),var(--g8));color:#fff;font-weight:800}
+  .row{display:flex;gap:8px}
+</style>
 </head>
 <body>
   <header>
     <div class="nav">
-      <div class="brand"><div class="logo" aria-hidden="true"></div>Medical Hub — Vibrant Learning <span id="signedLabel" class="signed"></span></div>
-      <div class="actions">
+      <div class="brand"><div class="logo"></div>Medical Hub — Vibrant Learning <span id="signedLabel" class="signed"></span></div>
+      <div class="row">
         <button class="btn btn-outline" id="amhToggle">Amharic</button>
+        <button class="btn btn-primary" id="addCourseBtn">Add Course</button>
         <button class="btn btn-primary" id="signinBtn">Sign In</button>
       </div>
     </div>
   </header>
 
   <!-- Sign-in Modal -->
-  <div id="signinModal">
+  <div id="signinModal" class="modal">
     <div class="box">
       <h2 style="margin:0 0 10px">Sign in to continue</h2>
       <input id="nameInput" type="text" placeholder="Your name">
@@ -92,21 +87,45 @@
     </div>
   </div>
 
+  <!-- Add Course Modal (Admins only) -->
+  <div id="addCourseModal" class="modal">
+    <div class="box">
+      <h2 style="margin:0 0 10px">Add new course</h2>
+      <input id="newCourseTitle" type="text" placeholder="Course title (e.g., Oncology)">
+      <input id="newCourseAmh" type="text" placeholder="Amharic title (optional)">
+      <select id="newCourseCat">
+        <option value="">Select category</option>
+        <option value="Core">Core</option>
+        <option value="Clinical">Clinical</option>
+        <option value="Public">Public</option>
+        <option value="Specialized">Specialized</option>
+        <option value="Allied">Allied</option>
+        <option value="Skills">Skills</option>
+      </select>
+      <button id="submitNewCourse">Add course</button>
+    </div>
+  </div>
+
+  <!-- Course Modal: shows course info and quick upload links -->
+  <div id="courseModal" class="modal">
+    <div class="box">
+      <h2 id="courseModalTitle" style="margin:0 0 10px">Course</h2>
+      <p id="courseModalDesc" style="margin:0 0 10px;color:#555">Downloads, videos, and live links are below each card. Admins: use Upload to attach URLs.</p>
+      <button id="closeCourseModal">Close</button>
+    </div>
+  </div>
+
   <main class="container">
     <section class="hero">
-      <div class="hero-card">
-        <h1>All health courses with downloads under each section</h1>
-        <p class="subtitle">Books, notes, PPTs, PDFs, videos, quizzes, and exam sheets — touch-responsive, bilingual, and downloadable.</p>
+      <div class="card-hero">
+        <h1>All health courses with real downloads and admin uploads</h1>
+        <p class="subtitle">Books, notes, PPTs, PDFs, videos, quizzes, exam sheets — per course, touch-responsive, bilingual.</p>
         <div class="chips">
-          <div class="chip">Core Sciences</div>
-          <div class="chip">Clinical Subjects</div>
-          <div class="chip">Public Health</div>
-          <div class="chip">Specialized</div>
-          <div class="chip">Allied & Modern</div>
-          <div class="chip">Skills & Practicals</div>
+          <div class="chip">Core Sciences</div><div class="chip">Clinical</div><div class="chip">Public Health</div>
+          <div class="chip">Specialized</div><div class="chip">Allied</div><div class="chip">Skills</div>
         </div>
         <div class="search-wrap">
-          <input id="search" class="search" type="search" placeholder="Search courses (e.g., Cardiology, Anatomy)..."/>
+          <input id="search" class="search" type="search" placeholder="Search courses (e.g., Cardiology, Anatomy)"/>
           <button class="btn btn-primary" id="clearSearch">Clear</button>
         </div>
         <div class="filters">
@@ -119,190 +138,202 @@
           <button class="filter" data-filter="Skills">Skills</button>
         </div>
       </div>
-      <div class="hero-card highlight">
+      <div class="card-hero highlight">
         <h3 style="margin:0 0 8px">Admin quick actions</h3>
         <ul style="margin:0 0 10px 18px">
-          <li><strong>Upload:</strong> Paste GitHub/Drive links for books, notes, PPTs, PDFs, videos, quizzes, exam sheets.</li>
-          <li><strong>Downloads:</strong> Direct links so learners can save offline after sign-in.</li>
-          <li><strong>Videos:</strong> Add YouTube/Drive links under “Videos” in each course.</li>
-          <li><strong>Amharic:</strong> Toggle labels for bilingual navigation.</li>
+          <li><strong>Upload:</strong> Paste Google Drive direct links, GitHub raw links, or CDN URLs.</li>
+          <li><strong>Downloads:</strong> Learners can save offline after sign-in.</li>
+          <li><strong>Videos:</strong> Add YouTube/Drive links under “Videos”.</li>
+          <li><strong>New course:</strong> Use “Add Course” to create a full section.</li>
         </ul>
-        <small style="color:#b23a3a;font-weight:700">Uploads visible to admins after sign-in.</small>
+        <small style="color:#b23a3a;font-weight:700">Uploads and add course visible to admins after sign-in.</small>
       </div>
     </section>
 
     <!-- Catalog Grid -->
     <section id="all-courses">
       <div class="grid" id="courseGrid">
-
-        <!-- ========== Core Medical Sciences ========== -->
+        <!-- Preloaded courses -->
         <div class="card" data-cat="Core" data-title="Anatomy">
           <h3>🏥 Anatomy <span class="amh">አናቶሚ</span></h3>
-          <div class="badges">
-            <span class="badge">Books</span><span class="badge">Notes</span><span class="badge">PPTs</span>
-            <span class="badge">PDFs</span><span class="badge">Videos</span><span class="badge">Quizzes</span><span class="badge">Exam sheets</span>
-          </div>
+          <div class="badges"><span class="badge">Books</span><span class="badge">Notes</span><span class="badge">PPTs</span><span class="badge">Videos</span><span class="badge">Quizzes</span><span class="badge">Exam sheets</span></div>
           <div class="accordion">
             <details open><summary>Downloads</summary>
               <div class="files">
-                <a class="file" href="#" data-file="Anatomy_Book.pdf" download>📚 Book (PDF)</a>
-                <a class="file" href="#" data-file="Anatomy_Notes.zip" download>📝 Notes (ZIP)</a>
-                <a class="file" href="#" data-file="Anatomy_PPTs.zip" download>📊 PPTs (ZIP)</a>
-                <a class="file" href="#" data-file="Anatomy_Diagrams.pdf" download>🖼️ Diagrams (PDF)</a>
-                <a class="file" href="#" data-file="Anatomy_QuizPack.zip" download>❓ Quizzes (ZIP)</a>
-                <a class="file" href="#" data-file="Anatomy_ExamSheets.pdf" download>🧾 Exam sheets (PDF)</a>
+                <a class="file" data-type="book" data-url="https://example.com/files/Anatomy_Book.pdf" download>📚 Book (PDF)</a>
+                <a class="file" data-type="notes" data-url="https://example.com/files/Anatomy_Notes.zip" download>📝 Notes (ZIP)</a>
+                <a class="file" data-type="ppts" data-url="https://example.com/files/Anatomy_PPTs.zip" download>📊 PPTs (ZIP)</a>
+                <a class="file" data-type="pdfs" data-url="https://example.com/files/Anatomy_Diagrams.pdf" download>🖼️ Diagrams (PDF)</a>
+                <a class="file" data-type="quiz" data-url="https://example.com/files/Anatomy_Quizzes.zip" download>❓ Quizzes (ZIP)</a>
+                <a class="file" data-type="exam" data-url="https://example.com/files/Anatomy_ExamSheets.pdf" download>🧾 Exam sheets (PDF)</a>
               </div>
             </details>
             <details><summary>Videos</summary>
               <div class="files">
                 <a class="file" href="https://www.youtube.com/" target="_blank">▶️ YouTube Playlist</a>
-                <a class="file" href="#" data-file="Anatomy_Videos.txt" download>🎬 Video links (TXT)</a>
+                <a class="file" data-type="videos" data-url="https://example.com/files/Anatomy_VideoLinks.txt" download>🎬 Video links (TXT)</a>
               </div>
             </details>
-            <details><summary>Lectures & Live</summary>
-              <ul style="margin:8px 0 0 18px">
-                <li>Gross anatomy overview</li><li>Neuroanatomy basics</li><li>Vascular & lymphatics</li>
-              </ul>
-            </details>
+            <details><summary>Lectures & Live</summary><ul style="margin:8px 0 0 18px"><li>Gross anatomy overview</li><li>Neuroanatomy basics</li><li>Vascular & lymphatics</li></ul></details>
           </div>
-          <div class="cta-row">
-            <a class="link-btn secondary openCourse" href="#">Open course</a>
-            <a class="link-btn uploadBtn" href="#">Upload</a>
-          </div>
+          <div class="cta-row"><a class="link-btn secondary openCourse" href="#">Open course</a><a class="link-btn uploadBtn" href="#">Upload</a></div>
         </div>
 
         <div class="card" data-cat="Core" data-title="Physiology">
           <h3>🏥 Physiology <span class="amh">ፊዚዮሎጂ</span></h3>
-          <div class="badges">
-            <span class="badge">Books</span><span class="badge">Notes</span><span class="badge">PPTs</span>
-            <span class="badge">PDFs</span><span class="badge">Videos</span><span class="badge">Quizzes</span><span class="badge">Exam sheets</span>
-          </div>
+          <div class="badges"><span class="badge">Books</span><span class="badge">Notes</span><span class="badge">PPTs</span><span class="badge">Videos</span><span class="badge">Quizzes</span><span class="badge">Exam sheets</span></div>
           <div class="accordion">
             <details open><summary>Downloads</summary>
               <div class="files">
-                <a class="file" href="#" data-file="Physiology_Handbook.pdf" download>📚 Handbook (PDF)</a>
-                <a class="file" href="#" data-file="Physiology_Notes.zip" download>📝 Notes (ZIP)</a>
-                <a class="file" href="#" data-file="ECG_PPTs.zip" download>📊 ECG PPTs (ZIP)</a>
-                <a class="file" href="#" data-file="Respiratory_Primer.pdf" download>🫁 Respiratory (PDF)</a>
-                <a class="file" href="#" data-file="Physiology_Quizzes.zip" download>❓ Quizzes (ZIP)</a>
-                <a class="file" href="#" data-file="Physiology_ExamSheets.pdf" download>🧾 Exam sheets (PDF)</a>
+                <a class="file" data-type="book" data-url="https://example.com/files/Physiology_Handbook.pdf" download>📚 Handbook (PDF)</a>
+                <a class="file" data-type="notes" data-url="https://example.com/files/Physiology_Notes.zip" download>📝 Notes (ZIP)</a>
+                <a class="file" data-type="ppts" data-url="https://example.com/files/ECG_PPTs.zip" download>📊 ECG PPTs (ZIP)</a>
+                <a class="file" data-type="pdfs" data-url="https://example.com/files/Respiratory_Primer.pdf" download>🫁 Respiratory (PDF)</a>
+                <a class="file" data-type="quiz" data-url="https://example.com/files/Physiology_Quizzes.zip" download>❓ Quizzes (ZIP)</a>
+                <a class="file" data-type="exam" data-url="https://example.com/files/Physiology_ExamSheets.pdf" download>🧾 Exam sheets (PDF)</a>
               </div>
             </details>
             <details><summary>Videos</summary>
               <div class="files">
                 <a class="file" href="https://www.youtube.com/" target="_blank">▶️ Physiology Playlist</a>
-                <a class="file" href="#" data-file="Physiology_Videos.txt" download>🎬 Video links (TXT)</a>
+                <a class="file" data-type="videos" data-url="https://example.com/files/Physiology_VideoLinks.txt" download>🎬 Video links (TXT)</a>
               </div>
             </details>
-            <details><summary>Lectures & Live</summary>
-              <ul style="margin:8px 0 0 18px">
-                <li>Cardiac cycle & ECG</li><li>Renal function</li><li>Pulmonary mechanics</li>
-              </ul>
-            </details>
+            <details><summary>Lectures & Live</summary><ul style="margin:8px 0 0 18px"><li>Cardiac cycle & ECG</li><li>Renal function</li><li>Pulmonary mechanics</li></ul></details>
           </div>
           <div class="cta-row"><a class="link-btn secondary openCourse" href="#">Open course</a><a class="link-btn uploadBtn" href="#">Upload</a></div>
         </div>
 
-        <div class="card" data-cat="Core" data-title="Biochemistry">
-          <h3>🏥 Biochemistry <span class="amh">ባዮኬሚስትሪ</span></h3>
-          <div class="badges"><span class="badge">Books</span><span class="badge">Notes</span><span class="badge">PPTs</span><span class="badge">Videos</span><span class="badge">Quizzes</span></div>
+        <div class="card" data-cat="Clinical" data-title="Orthopedics">
+          <h3>👩‍⚕️ Orthopedics <span class="amh">ኦርቶፔዲክስ</span></h3>
+          <div class="badges"><span class="badge">Textbook</span><span class="badge">Notes</span><span class="badge">PPTs</span><span class="badge">Videos</span><span class="badge">Quizzes</span><span class="badge">Exam sheets</span></div>
           <div class="accordion">
             <details open><summary>Downloads</summary>
               <div class="files">
-                <a class="file" href="#" data-file="Biochem_Textbook.pdf" download>📚 Textbook (PDF)</a>
-                <a class="file" href="#" data-file="Biochem_Notes.zip" download>📝 Notes (ZIP)</a>
-                <a class="file" href="#" data-file="Biochem_PPTs.zip" download>📊 PPTs (ZIP)</a>
-                <a class="file" href="#" data-file="Genetics_Summary.pdf" download>🧬 Genetics (PDF)</a>
-                <a class="file" href="#" data-file="Biochem_Quizzes.zip" download>❓ Quizzes (ZIP)</a>
+                <a class="file" data-type="book" data-url="https://example.com/files/Surgery_Textbook.pdf" download>📚 Textbook (PDF)</a>
+                <a class="file" data-type="notes" data-url="https://example.com/files/Surgery_Notes.zip" download>📝 Notes (ZIP)</a>
+                <a class="file" data-type="ppts" data-url="https://example.com/files/Surgery_PPTs.zip" download>📊 PPTs (ZIP)</a>
+                <a class="file" data-type="quiz" data-url="https://example.com/files/Surgery_Quizzes.zip" download>❓ Quizzes (ZIP)</a>
+                <a class="file" data-type="exam" data-url="https://example.com/files/Surgery_ExamSheets.pdf" download>🧾 Exam sheets (PDF)</a>
               </div>
             </details>
             <details><summary>Videos</summary>
               <div class="files">
-                <a class="file" href="https://www.youtube.com/" target="_blank">▶️ Biochem Playlist</a>
-                <a class="file" href="#" data-file="Biochem_Videos.txt" download>🎬 Video links (TXT)</a>
+                <a class="file" href="https://www.youtube.com/" target="_blank">▶️ Ortho/Surgery Playlist</a>
+                <a class="file" data-type="videos" data-url="https://example.com/files/Orthopedics_VideoLinks.txt" download>🎬 Video links (TXT)</a>
               </div>
             </details>
           </div>
           <div class="cta-row"><a class="link-btn secondary openCourse" href="#">Open course</a><a class="link-btn uploadBtn" href="#">Upload</a></div>
         </div>
 
-        <div class="card" data-cat="Core" data-title="Pathology">
-          <h3>🏥 Pathology <span class="amh">ፓትሎጂ</span></h3>
-          <div class="badges"><span class="badge">Books</span><span class="badge">Slides</span><span class="badge">PPTs</span><span class="badge">Quizzes</span></div>
-          <div class="accordion">
-            <details open><summary>Downloads</summary>
-              <div class="files">
-                <a class="file" href="#" data-file="Pathology_Book.pdf" download>📚 Book (PDF)</a>
-                <a class="file" href="#" data-file="Pathology_Notes.zip" download>📝 Notes (ZIP)</a>
-                <a class="file" href="#" data-file="Path_Slides.zip" download>🖼️ Slides (ZIP)</a>
-                <a class="file" href="#" data-file="Pathology_PPTs.zip" download>📊 PPTs (ZIP)</a>
-                <a class="file" href="#" data-file="Path_Quizzes.zip" download>❓ Quizzes (ZIP)</a>
-                <a class="file" href="#" data-file="Path_ExamSheets.pdf" download>🧾 Exam sheets (PDF)</a>
-              </div>
-            </details>
-          </div>
-          <div class="cta-row"><a class="link-btn secondary openCourse" href="#">Open course</a><a class="link-btn uploadBtn" href="#">Upload</a></div>
-        </div>
+        <!-- Add more preloaded cards as needed -->
+      </div>
+    </section>
+  </main>
 
-        <div class="card" data-cat="Core" data-title="Pharmacology">
-          <h3>🏥 Pharmacology <span class="amh">ፋርማኮሎጂ</span></h3>
-          <div class="badges"><span class="badge">Handbook</span><span class="badge">Drug charts</span><span class="badge">PPTs</span><span class="badge">Quizzes</span></div>
-          <div class="accordion">
-            <details open><summary>Downloads</summary>
-              <div class="files">
-                <a class="file" href="#" data-file="Pharm_Handbook.pdf" download>📚 Handbook (PDF)</a>
-                <a class="file" href="#" data-file="Pharm_Notes.zip" download>📝 Notes (ZIP)</a>
-                <a class="file" href="#" data-file="DrugCharts.pdf" download>📄 Drug charts (PDF)</a>
-                <a class="file" href="#" data-file="Pharm_PPTs.zip" download>📊 PPTs (ZIP)</a>
-                <a class="file" href="#" data-file="Pharm_Quizzes.zip" download>❓ Quizzes (ZIP)</a>
-                <a class="file" href="#" data-file="Pharm_ExamSheets.pdf" download>🧾 Exam sheets (PDF)</a>
-              </div>
-            </details>
-          </div>
-          <div class="cta-row"><a class="link-btn secondary openCourse" href="#">Open course</a><a class="link-btn uploadBtn" href="#">Upload</a></div>
-        </div>
+  <footer>© Medical Hub. Built for accessible education. Addis Ababa, Ethiopia.</footer>
 
-        <div class="card" data-cat="Core" data-title="Microbiology">
-          <h3>🏥 Microbiology <span class="amh">ማይክሮባዮሎጂ</span></h3>
-          <div class="badges"><span class="badge">Books</span><span class="badge">Notes</span><span class="badge">PPTs</span><span class="badge">Quizzes</span></div>
-          <div class="accordion">
-            <details open><summary>Downloads</summary>
-              <div class="files">
-                <a class="file" href="#" data-file="Micro_Book.pdf" download>📚 Book (PDF)</a>
-                <a class="file" href="#" data-file="Micro_Notes.zip" download>📝 Notes (ZIP)</a>
-                <a class="file" href="#" data-file="Micro_PPTs.zip" download>📊 PPTs (ZIP)</a>
-                <a class="file" href="#" data-file="Micro_Quizzes.zip" download>❓ Quizzes (ZIP)</a>
-                <a class="file" href="#" data-file="Micro_ExamSheets.pdf" download>🧾 Exam sheets (PDF)</a>
-              </div>
-            </details>
-          </div>
-          <div class="cta-row"><a class="link-btn secondary openCourse" href="#">Open course</a><a class="link-btn uploadBtn" href="#">Upload</a></div>
-        </div>
+  <script>
+    // Admin emails
+    const admins = [
+      "chernetisrael@outlook.com",
+      "chernetisrael66@gmail.com",
+      "chernetisrael344gmail.com"
+    ];
 
-        <div class="card" data-cat="Core" data-title="Forensic Medicine">
-          <h3>🏥 Forensic medicine <span class="amh">ፎሬንሲክ ሕክምና</span></h3>
-          <div class="badges"><span class="badge">Guide</span><span class="badge">Notes</span><span class="badge">PPTs</span><span class="badge">Quizzes</span></div>
-          <div class="accordion">
-            <details open><summary>Downloads</summary>
-              <div class="files">
-                <a class="file" href="#" data-file="Forensic_Guide.pdf" download>📚 Guide (PDF)</a>
-                <a class="file" href="#" data-file="Forensic_Notes.zip" download>📝 Notes (ZIP)</a>
-                <a class="file" href="#" data-file="Forensic_PPTs.zip" download>📊 PPTs (ZIP)</a>
-                <a class="file" href="#" data-file="Forensic_Quizzes.zip" download>❓ Quizzes (ZIP)</a>
-                <a class="file" href="#" data-file="Forensic_ExamSheets.pdf" download>🧾 Exam sheets (PDF)</a>
-              </div>
-            </details>
-          </div>
-          <div class="cta-row"><a class="link-btn secondary openCourse" href="#">Open course</a><a class="link-btn uploadBtn" href="#">Upload</a></div>
-        </div>
+    // DOM elements
+    const signinModal = document.getElementById("signinModal");
+    const signinBtn = document.getElementById("signinBtn");
+    const submitSignin = document.getElementById("submitSignin");
+    const nameInput = document.getElementById("nameInput");
+    const emailInput = document.getElementById("emailInput");
+    const signedLabel = document.getElementById("signedLabel");
+    const amhToggle = document.getElementById("amhToggle");
 
-        <!-- ========== Clinical Subjects ========== -->
-        <div class="card" data-cat="Clinical" data-title="General Medicine">
-          <h3>👩‍⚕️ General medicine <span class="amh">አጠቃላይ ሕክምና</span></h3>
-          <div class="badges"><span class="badge">Protocols</span><span class="badge">PPTs</span><span class="badge">Quizzes</span><span class="badge">Videos</span></div>
-          <div class="accordion">
-            <details open><summary>Downloads</summary>
-              <div class="files">
-                <a class="file" href="#" data-file="IM_Protocol.pdf" download>📚 Protocols (PDF)</a>
-                <a class="file" href="#" data-file="IM_CaseNotes.zip" download>📝 Case notes (ZIP)</a>
-                <a class="file" hr
+    const addCourseBtn = document.getElementById("addCourseBtn");
+    const addCourseModal = document.getElementById("addCourseModal");
+    const submitNewCourse = document.getElementById("submitNewCourse");
+    const newCourseTitle = document.getElementById("newCourseTitle");
+    const newCourseAmh = document.getElementById("newCourseAmh");
+    const newCourseCat = document.getElementById("newCourseCat");
+
+    const courseModal = document.getElementById("courseModal");
+    const courseModalTitle = document.getElementById("courseModalTitle");
+    const courseModalDesc = document.getElementById("courseModalDesc");
+    const closeCourseModal = document.getElementById("closeCourseModal");
+
+    const courseGrid = document.getElementById("courseGrid");
+    const search = document.getElementById("search");
+    const clearSearch = document.getElementById("clearSearch");
+
+    // Session check
+    window.addEventListener("load", () => {
+      const user = JSON.parse(localStorage.getItem("medicalHubUser") || "{}");
+      if (user.email) applyUserSession(user);
+      else signinModal.style.display = "flex";
+
+      // Load any saved courses/uploads
+      hydrateFromStorage();
+      bindInteractions();
+    });
+
+    // Sign-in
+    signinBtn.addEventListener("click", () => signinModal.style.display = "flex");
+    submitSignin.addEventListener("click", () => {
+      const name = nameInput.value.trim();
+      const email = emailInput.value.trim().toLowerCase();
+      if (!name || !email) return alert("Please enter both name and email.");
+      const isAdmin = admins.includes(email);
+      const user = { name, email, isAdmin };
+      localStorage.setItem("medicalHubUser", JSON.stringify(user));
+      signinModal.style.display = "none";
+      applyUserSession(user);
+    });
+
+    function applyUserSession(user){
+      document.querySelectorAll(".uploadBtn").forEach(btn => btn.style.display = user.isAdmin ? "inline-flex" : "none");
+      document.querySelectorAll(".openCourse").forEach(btn => btn.textContent = user.isAdmin ? "Open course (Admin)" : "Open course");
+      signinBtn.textContent = "Signed in";
+      signinBtn.disabled = true;
+      signedLabel.textContent = "Signed in as " + user.name;
+    }
+
+    // Amharic toggle
+    amhToggle.addEventListener("click", () => {
+      document.querySelectorAll(".amh").forEach(el => {
+        el.style.display = (el.style.display === "none") ? "inline" : "none";
+      });
+    });
+
+    // Search
+    function applySearch(){
+      const q = (search.value || "").trim().toLowerCase();
+      const cards = Array.from(document.querySelectorAll("#courseGrid .card"));
+      cards.forEach(c => {
+        const title = (c.dataset.title || "").toLowerCase();
+        c.classList.toggle("hide", q && !title.includes(q));
+      });
+    }
+    search.addEventListener("input", applySearch);
+    clearSearch.addEventListener("click", () => { search.value = ""; applySearch(); });
+
+    // Filters
+    document.querySelectorAll(".filter").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const cat = btn.dataset.filter;
+        const cards = Array.from(document.querySelectorAll("#courseGrid .card"));
+        cards.forEach(c => c.classList.toggle("hide", cat !== "All" && c.dataset.cat !== cat));
+      });
+    });
+
+    // Bind interactions to current and future elements
+    function bindInteractions(){
+      // Open course
+      document.querySelectorAll(".openCourse").forEach(btn => {
+        btn.onclick = (e) => {
+          e.preventDefault();
+          const card = e.target.closest(".card");
+          const title = card?.dataset.title || "Course";
+          courseModalTitle.textContent = title;
+          course
