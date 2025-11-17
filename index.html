@@ -2,149 +2,580 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Medical Hub - መምህራን መረጃ</title>
-  <link rel="manifest" href="manifest.json" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Medical Hub</title>
   <style>
-    body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; background: #f4f6f8; color: #333; }
-    header, footer { background: #2c3e50; color: white; text-align: center; padding: 1rem; }
-    header img, footer img { width: 50px; margin-top: 10px; }
-    nav { background: #34495e; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; }
-    nav a { color: white; padding: 1rem; text-decoration: none; font-weight: bold; }
-    nav a:hover { background: #2c3e50; }
-    nav img { width: 30px; margin-left: 10px; }
-    .section { padding: 2rem; max-width: 900px; margin: auto; }
-    .card { background: white; padding: 1rem; margin: 1rem 0; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-    input, select, textarea { width: 100%; padding: 0.5rem; margin: 0.5rem 0; }
-    .btn { background: #1abc9c; color: white; padding: 0.5rem 1rem; border: none; cursor: pointer; border-radius: 4px; }
-    .btn:hover { background: #16a085; }
-    ul.course-list { list-style: none; padding: 0; }
-    ul.course-list li { margin: 0.5rem 0; }
-    ul.course-list li ul { margin-left: 1rem; }
-    .amharic { font-family: 'Noto Sans Ethiopic', sans-serif; }
+    :root { --bg:#0f172a; --card:#111827; --text:#e5e7eb; --muted:#9ca3af; --accent:#22c55e; --danger:#ef4444; --warn:#f59e0b; }
+    * { box-sizing:border-box; } body { margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto; background:var(--bg); color:var(--text); }
+    header { padding:16px; border-bottom:1px solid #1f2937; display:flex; align-items:center; justify-content:space-between; }
+    .brand { font-weight:700; letter-spacing:.3px; }
+    .container { max-width:980px; margin:0 auto; padding:16px; }
+    .grid { display:grid; gap:12px; }
+    .card { background:var(--card); border:1px solid #1f2937; border-radius:12px; padding:14px; }
+    input, textarea, button, select { width:100%; padding:10px; border-radius:10px; border:1px solid #374151; background:#0b1220; color:var(--text); }
+    input::placeholder, textarea::placeholder { color:var(--muted); }
+    button { background:#16a34a; border:none; font-weight:600; cursor:pointer; }
+    button.secondary { background:#334155; }
+    button.danger { background:var(--danger); }
+    button.warn { background:#f59e0b; color:#111827; }
+    .row { display:flex; gap:10px; flex-wrap:wrap; }
+    .row > * { flex:1; min-width:180px; }
+    .pill { display:inline-block; background:#1f2937; padding:4px 10px; border-radius:999px; font-size:12px; color:var(--muted); }
+    .hidden { display:none !important; }
+    .muted { color:var(--muted); font-size:12px; }
+    .list { display:grid; gap:8px; }
+    .lesson { padding:10px; border:1px dashed #334155; border-radius:10px; }
+    .toolbar { display:flex; gap:8px; flex-wrap:wrap; }
+    .videoWrap, .liveWrap { background:#0b1220; border:1px solid #1f2937; border-radius:10px; overflow:hidden; }
+    iframe, video { width:100%; height:220px; border:0; }
+    .badge { display:inline-block; padding:2px 8px; border-radius:999px; font-size:12px; background:#1f2937; color:#93c5fd; }
+    .countdown { font-weight:600; color:#93c5fd; }
+    .announce { border-left:4px solid #22c55e; padding:10px; background:#0b1220; border-radius:10px; }
+    .divider { height:1px; background:#1f2937; margin:10px 0; }
   </style>
 </head>
 <body>
-
   <header>
-    <h1>Medical Hub</h1>
-    <p>Accessible Learning for All | በአማርኛ የተዘጋጀ ትምህርት</p>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/7/71/Flag_of_Ethiopia.svg" alt="Ethiopian Flag" />
+    <div class="brand">Medical Hub</div>
+    <div id="userStatus" class="pill">Guest</div>
   </header>
 
-  <nav>
-    <a href="#auth">Access</a>
-    <a href="#courses">Courses</a>
-    <a href="#premium">Premium</a>
-    <a href="#admin">Admin</a>
-    <a href="#contact">Contact</a>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/7/71/Flag_of_Ethiopia.svg" alt="Ethiopian Flag" />
-  </nav>
-
-  <section class="section" id="auth">
-    <h2>🔐 User Access</h2>
-    <div class="card">
-      <h3>🆕 Sign Up</h3>
-      <form>
-        <input type="text" placeholder="Full Name" required />
-        <input type="email" placeholder="Email" required />
-        <input type="tel" placeholder="Phone Number" required />
-        <input type="password" placeholder="Create Password" required />
-        <button class="btn">Create Account</button>
-      </form>
+  <div class="container grid">
+    <!-- Announcements (visible to all) -->
+    <div id="announcementsCard" class="card hidden">
+      <h3>Announcements</h3>
+      <div id="announcementsList" class="list"></div>
     </div>
-    <div class="card">
-      <h3>🔓 Login</h3>
-      <form>
-        <input type="email" placeholder="Email or Phone" required />
-        <input type="password" placeholder="Password" required />
-        <button class="btn">Login</button>
-      </form>
-    </div>
-  </section>
 
-  <section class="section" id="courses">
-    <h2>📚 Multi-Level Courses</h2>
-    <ul class="course-list">
-      <li><strong>Level 1: Basics</strong>
-        <ul><li>Human Anatomy</li><li>Medical Terminology</li></ul>
-      </li>
-      <li><strong>Level 2: Intermediate</strong>
-        <ul><li>Pharmacology</li><li>Pathology</li></ul>
-      </li>
-      <li><strong>Level 3: Advanced</strong>
-        <ul><li>Clinical Diagnosis</li><li>Surgical Techniques</li></ul>
-      </li>
-    </ul>
-  </section>
+    <!-- Auth -->
+    <div id="authSection" class="grid">
+      <div class="card">
+        <h3>Sign up</h3>
+        <div class="row">
+          <input id="suName" type="text" placeholder="Full name" />
+          <input id="suEmail" type="email" placeholder="Email" />
+        </div>
+        <div class="row">
+          <input id="suPassword" type="password" placeholder="Password (min 6)" />
+        </div>
+        <button id="btnSignUp">Create account</button>
+        <p class="muted">No premium required. You’ll enter directly after signing up.</p>
+      </div>
 
-  <section class="section" id="premium">
-    <h2>💎 Premium Access</h2>
-    <div class="card">
-      <p>Pay locally to unlock premium content:</p>
-      <ul>
-        <li><strong>CBE:</strong> 1000401696745 (Cherenet Esrael Bueno)</li>
-        <li><strong>Telebirr:</strong> 0910037872 (Cherenet Esrael Bueno)</li>
-      </ul>
-      <p>Send proof via Telegram for approval.</p>
-      <a href="https://t.me/YourBotUsername?start=payment_verification" class="btn">Submit Payment Proof</a>
+      <div class="card">
+        <h3>Login</h3>
+        <div class="row">
+          <input id="liEmail" type="email" placeholder="Email" />
+          <input id="liPassword" type="password" placeholder="Password" />
+        </div>
+        <button id="btnLogin">Login</button>
+      </div>
     </div>
-  </section>
 
-  <section class="section" id="admin">
-    <h2>🛠️ Admin Panel</h2>
-    <div class="card">
-      <h3>📤 Upload Resource</h3>
-      <form>
-        <input type="text" placeholder="Upload Title" />
-        <input type="file" />
-        <button class="btn">Upload Resource</button>
-      </form>
-    </div>
-    <div class="card">
-      <h3>➕ Add New Course Section</h3>
-      <form id="add-course-form">
-        <input type="text" id="new-section-title" placeholder="Section Title" required />
-        <textarea id="new-section-content" placeholder="Course List (comma-separated)" required></textarea>
-        <button type="submit" class="btn">Add Section</button>
-      </form>
-    </div>
-    <div class="card">
-      <h3>✅ Manual Approval</h3>
-      <button class="btn">View Requests</button>
-    </div>
-  </section>
+    <!-- Main App -->
+    <div id="appSection" class="hidden grid">
+      <div class="card">
+        <div class="row">
+          <div>
+            <div><strong>User:</strong> <span id="currentUserName">-</span></div>
+            <div class="muted">Role: <span id="currentUserRole">student</span></div>
+          </div>
+          <div class="toolbar">
+            <a id="openBot" class="pill" href="https://t.me/Helanezabot" target="_blank">Open @Helanezabot</a>
+            <button id="btnLogout" class="secondary">Logout</button>
+          </div>
+        </div>
+      </div>
 
-  <section class="section" id="contact">
-    <h2>📞 Contact</h2>
-    <p>Email: <a href="mailto:medicalhub@example.com">medicalhub@example.com</a></p>
-    <p>Telegram: <a href="https://t.me/YourBotUsername">@YourBotUsername</a></p>
-    <p class="amharic">እባኮትን ለመረጃ ወይም ለመርዳት በቴሌግራም ያግኙን።</p>
-  </section>
+      <!-- Admin Panel -->
+      <div id="adminPanel" class="card hidden">
+        <h3>Admin controls</h3>
+        <div class="row">
+          <input id="sectionTitle" type="text" placeholder="New section title" />
+          <textarea id="sectionDesc" rows="2" placeholder="Short description"></textarea>
+        </div>
+        <button id="btnAddSection">Add section</button>
+        <div class="divider"></div>
 
-  <footer>
-    <p>© 2025 Medical Hub | Built with ❤️ for learners in Ethiopia</p>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/7/71/Flag_of_Ethiopia.svg" alt="Ethiopian Flag" />
-  </footer>
+        <h4>Add lesson to a section</h4>
+        <div class="row">
+          <select id="lessonSection"></select>
+          <input id="lessonTitle" type="text" placeholder="Lesson title" />
+        </div>
+        <div class="row">
+          <input id="videoUrl" type="url" placeholder="Video URL (YouTube/Jitsi/MP4/Drive preview)" />
+          <input id="resourceFile" type="file" />
+        </div>
+        <textarea id="lessonNotes" rows="3" placeholder="Notes / description"></textarea>
+        <button id="btnAddLesson" class="warn">Add lesson</button>
+        <p class="muted">Tip: For YouTube, paste the share link. For Drive preview, use the preview URL.</p>
+
+        <div class="divider"></div>
+        <h4>Schedule live class</h4>
+        <div class="row">
+          <select id="liveSection"></select>
+          <input id="liveTitle" type="text" placeholder="Live class title" />
+        </div>
+        <div class="row">
+          <input id="liveStart" type="datetime-local" />
+          <input id="liveLink" type="url" placeholder="Live link (Jitsi/Meet/YouTube Live/Telegram stream)" />
+        </div>
+        <textarea id="liveDesc" rows="2" placeholder="Short agenda"></textarea>
+        <button id="btnScheduleLive">Schedule live</button>
+
+        <div class="divider"></div>
+        <h4>Post announcement</h4>
+        <textarea id="announceText" rows="2" placeholder="Short announcement (e.g., New lecture added)"></textarea>
+        <button id="btnPostAnnouncement" class="secondary">Post announcement</button>
+
+        <p class="muted" style="margin-top:8px;">Admin: chernetisrael66@gmail.com</p>
+      </div>
+
+      <!-- Courses -->
+      <div class="card">
+        <h3>Course sections</h3>
+        <div id="sectionsList" class="list"></div>
+      </div>
+    </div>
+  </div>
 
   <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('sw.js')
-        .then(reg => console.log('✅ Service Worker registered'))
-        .catch(err => console.error('❌ SW registration failed:', err));
+    const ADMIN_EMAIL = "chernetisrael66@gmail.com";
+
+    const store = {
+      get(key, fallback) { try { return JSON.parse(localStorage.getItem(key)) ?? fallback; } catch { return fallback; } },
+      set(key, value) { localStorage.setItem(key, JSON.stringify(value)); }
+    };
+
+    // Seed
+    if (!store.get("users", null)) store.set("users", []);
+    if (!store.get("sections", null)) store.set("sections", []);
+    if (!store.get("session", null)) store.set("session", { email: null });
+    if (!store.get("announcements", null)) store.set("announcements", []);
+
+    const el = {
+      userStatus: document.getElementById("userStatus"),
+      authSection: document.getElementById("authSection"),
+      appSection: document.getElementById("appSection"),
+      currentUserName: document.getElementById("currentUserName"),
+      currentUserRole: document.getElementById("currentUserRole"),
+      adminPanel: document.getElementById("adminPanel"),
+      sectionsList: document.getElementById("sectionsList"),
+      announcementsCard: document.getElementById("announcementsCard"),
+      announcementsList: document.getElementById("announcementsList"),
+      suName: document.getElementById("suName"),
+      suEmail: document.getElementById("suEmail"),
+      suPassword: document.getElementById("suPassword"),
+      liEmail: document.getElementById("liEmail"),
+      liPassword: document.getElementById("liPassword"),
+      sectionTitle: document.getElementById("sectionTitle"),
+      sectionDesc: document.getElementById("sectionDesc"),
+      lessonSection: document.getElementById("lessonSection"),
+      lessonTitle: document.getElementById("lessonTitle"),
+      videoUrl: document.getElementById("videoUrl"),
+      resourceFile: document.getElementById("resourceFile"),
+      lessonNotes: document.getElementById("lessonNotes"),
+      liveSection: document.getElementById("liveSection"),
+      liveTitle: document.getElementById("liveTitle"),
+      liveStart: document.getElementById("liveStart"),
+      liveLink: document.getElementById("liveLink"),
+      liveDesc: document.getElementById("liveDesc"),
+      announceText: document.getElementById("announceText"),
+      btnSignUp: document.getElementById("btnSignUp"),
+      btnLogin: document.getElementById("btnLogin"),
+      btnLogout: document.getElementById("btnLogout"),
+      btnAddSection: document.getElementById("btnAddSection"),
+      btnAddLesson: document.getElementById("btnAddLesson"),
+      btnScheduleLive: document.getElementById("btnScheduleLive"),
+      btnPostAnnouncement: document.getElementById("btnPostAnnouncement"),
+      openBot: document.getElementById("openBot"),
+    };
+
+    function hash(s) { return btoa(unescape(encodeURIComponent(s))); }
+    function getUser(email) { return store.get("users", []).find(u => u.email.toLowerCase() === String(email).toLowerCase()); }
+    function isAdmin(email) { return email && email.toLowerCase() === ADMIN_EMAIL.toLowerCase(); }
+    function setSession(email) { store.set("session", { email }); render(); }
+
+    function signUp() {
+      const name = el.suName.value.trim();
+      const email = el.suEmail.value.trim();
+      const password = el.suPassword.value;
+      if (!name || !email || !password || password.length < 6) { alert("Fill all fields."); return; }
+      if (getUser(email)) { alert("Email already registered."); return; }
+      const role = isAdmin(email) ? "admin" : "student";
+      const users = store.get("users", []);
+      users.push({ name, email, passwordHash: hash(password), role });
+      store.set("users", users);
+      setSession(email);
     }
 
-    document.getElementById('add-course-form').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const title = document.getElementById('new-section-title').value;
-      const content = document.getElementById('new-section-content').value.split(',');
-      const section = document.createElement('li');
-      section.innerHTML = `<strong>${title}</strong><ul>${content.map(item => `<li>${item.trim()}</li>`).join('')}</ul>`;
-      document.querySelector('.course-list').appendChild(section);
-      alert('✅ New course section added!');
-      this.reset();
-    });
-  </script>
+    function login() {
+      const email = el.liEmail.value.trim();
+      const password = el.liPassword.value;
+      const user = getUser(email);
+      if (!user || user.passwordHash !== hash(password)) { alert("Invalid credentials."); return; }
+      setSession(email);
+    }
 
+    function logout() { store.set("session", { email: null }); render(); }
+
+    // Admin: add a section
+    function addSection() {
+      const title = el.sectionTitle.value.trim();
+      const desc = el.sectionDesc.value.trim();
+      if (!title) { alert("Title required."); return; }
+      const sections = store.get("sections", []);
+      sections.push({ id: crypto.randomUUID(), title, desc, lessons: [], lives: [] });
+      store.set("sections", sections);
+      el.sectionTitle.value = ""; el.sectionDesc.value = "";
+      syncSectionSelects(); renderSections();
+    }
+
+    // Admin: add a lesson (optional video URL + file)
+    function addLesson() {
+      const sectionId = el.lessonSection.value;
+      const title = el.lessonTitle.value.trim();
+      const video = el.videoUrl.value.trim();
+      const notes = el.lessonNotes.value.trim();
+      const fileInput = el.resourceFile;
+      if (!sectionId) { alert("Select a section."); return; }
+      if (!title) { alert("Lesson title required."); return; }
+
+      const sections = store.get("sections", []);
+      const s = sections.find(x => x.id === sectionId);
+      if (!s) return;
+
+      const lesson = { id: crypto.randomUUID(), title, video, notes, file: null };
+
+      // Demo storage: metadata only; base64 optional
+      if (fileInput.files.length > 0) {
+        const f = fileInput.files[0];
+        lesson.file = { name: f.name, type: f.type, size: f.size };
+        // Uncomment to store base64 (not recommended for large files):
+        // const reader = new FileReader();
+        // reader.onload = () => { lesson.file.content = reader.result; store.set("sections", sections); renderSections(); };
+        // reader.readAsDataURL(f);
+      }
+
+      s.lessons.push(lesson);
+      store.set("sections", sections);
+      el.lessonTitle.value = ""; el.videoUrl.value = ""; el.lessonNotes.value = ""; fileInput.value = "";
+      renderSections();
+    }
+
+    // Admin: schedule live
+    function scheduleLive() {
+      const sectionId = el.liveSection.value;
+      const title = el.liveTitle.value.trim();
+      const startISO = el.liveStart.value;
+      const link = el.liveLink.value.trim();
+      const desc = el.liveDesc.value.trim();
+      if (!sectionId) { alert("Select a section."); return; }
+      if (!title || !startISO || !link) { alert("Title, start time, and live link required."); return; }
+      const start = new Date(startISO).toISOString();
+
+      const sections = store.get("sections", []);
+      const s = sections.find(x => x.id === sectionId);
+      if (!s) return;
+      s.lives.push({ id: crypto.randomUUID(), title, start, link, desc, status: "scheduled" });
+      store.set("sections", sections);
+
+      // Optional announcement
+      const announcements = store.get("announcements", []);
+      announcements.unshift({ id: crypto.randomUUID(), text: `Live scheduled: ${title} — ${new Date(start).toLocaleString()}`, ts: Date.now() });
+      store.set("announcements", announcements);
+
+      el.liveTitle.value = ""; el.liveStart.value = ""; el.liveLink.value = ""; el.liveDesc.value = "";
+      renderAnnouncements(); renderSections();
+    }
+
+    // Admin: announcements
+    function postAnnouncement() {
+      const text = el.announceText.value.trim();
+      if (!text) return;
+      const announcements = store.get("announcements", []);
+      announcements.unshift({ id: crypto.randomUUID(), text, ts: Date.now() });
+      store.set("announcements", announcements);
+      el.announceText.value = "";
+      renderAnnouncements();
+    }
+
+    // Rendering
+    function renderAnnouncements() {
+      const arr = store.get("announcements", []);
+      el.announcementsCard.classList.toggle("hidden", arr.length === 0);
+      el.announcementsList.innerHTML = "";
+      arr.forEach(a => {
+        const d = document.createElement("div");
+        d.className = "announce";
+        d.innerHTML = `<div><span class="badge">Announcement</span> <span class="muted">${new Date(a.ts).toLocaleString()}</span></div>
+          <div style="margin-top:6px;">${escapeHtml(a.text)}</div>`;
+        el.announcementsList.appendChild(d);
+      });
+    }
+
+    function renderSections() {
+      const sections = store.get("sections", []);
+      const session = store.get("session", { email: null });
+      const admin = isAdmin(session.email);
+      el.sectionsList.innerHTML = "";
+      sections.forEach(section => {
+        const card = document.createElement("div");
+        card.className = "card";
+
+        // header
+        const header = document.createElement("div");
+        header.className = "row";
+        header.innerHTML = `
+          <div>
+            <h4 style="margin:0 0 6px 0;">${escapeHtml(section.title)}</h4>
+            <div class="muted">${escapeHtml(section.desc || "")}</div>
+          </div>
+          <div class="toolbar ${admin ? "" : "hidden"}">
+            <button class="secondary" data-id="${section.id}" data-action="add-lesson-prompt">+ Quick lesson</button>
+            <button class="danger" data-id="${section.id}" data-action="remove-section">Delete section</button>
+          </div>
+        `;
+        card.appendChild(header);
+
+        // Lives block
+        const livesWrap = document.createElement("div");
+        livesWrap.className = "list";
+        (section.lives || []).sort((a,b)=> new Date(a.start)-new Date(b.start)).forEach(live => {
+          const now = Date.now();
+          const start = new Date(live.start).getTime();
+          const diff = start - now;
+          const upcoming = diff > 0;
+          const countdown = upcoming ? formatCountdown(diff) : "Live window passed";
+          const liveCard = document.createElement("div");
+          liveCard.className = "lesson liveWrap";
+          liveCard.innerHTML = `
+            <div class="row">
+              <div>
+                <strong>Live: ${escapeHtml(live.title)}</strong>
+                <div class="muted">${new Date(live.start).toLocaleString()} — ${escapeHtml(live.desc || "")}</div>
+                <div class="countdown">${countdown}</div>
+              </div>
+              <div class="toolbar">
+                <a class="warn" href="${escapeAttr(live.link)}" target="_blank">Join live</a>
+                ${admin ? `<button class="secondary" data-section="${section.id}" data-live="${live.id}" data-action="delete-live">Delete</button>` : ""}
+              </div>
+            </div>
+          `;
+          livesWrap.appendChild(liveCard);
+        });
+        if ((section.lives || []).length) {
+          const title = document.createElement("div");
+          title.innerHTML = `<div class="muted">Live sessions</div>`;
+          card.appendChild(title);
+          card.appendChild(livesWrap);
+        }
+
+        // Lessons block
+        const lessonsWrap = document.createElement("div");
+        lessonsWrap.className = "list";
+        (section.lessons || []).forEach(lesson => {
+          const item = document.createElement("div");
+          item.className = "lesson";
+          const fileInfo = lesson.file ? `<div class="muted">Resource: ${escapeHtml(lesson.file.name)} (${escapeHtml(lesson.file.type)})</div>` : "";
+          const videoEmbed = embedVideo(lesson.video);
+          item.innerHTML = `
+            <div class="row">
+              <div style="flex:2;">
+                <strong>${escapeHtml(lesson.title)}</strong>
+                <div class="muted">${escapeHtml(lesson.notes || "")}</div>
+                ${videoEmbed ? `<div class="videoWrap" style="margin-top:8px;">${videoEmbed}</div>` : ""}
+                ${fileInfo}
+              </div>
+              <div class="toolbar" style="flex:1; align-items:flex-start;">
+                ${lesson.video ? `<a class="secondary" href="${escapeAttr(lesson.video)}" target="_blank">Open video</a>` : ""}
+                ${lesson.file ? `<button class="secondary" data-section="${section.id}" data-lesson="${lesson.id}" data-action="download-file">Download</button>` : ""}
+                ${admin ? `<button class="danger" data-section="${section.id}" data-lesson="${lesson.id}" data-action="remove-lesson">Delete</button>` : ""}
+              </div>
+            </div>
+          `;
+          lessonsWrap.appendChild(item);
+        });
+        card.appendChild(lessonsWrap);
+        el.sectionsList.appendChild(card);
+      });
+
+      // Actions in sections
+      el.sectionsList.querySelectorAll("button, a.warn").forEach(btn => {
+        const action = btn.getAttribute("data-action");
+        if (!action) return;
+        btn.onclick = () => {
+          if (action === "remove-section") {
+            const id = btn.getAttribute("data-id");
+            if (confirm("Delete this section?")) removeSection(id);
+          }
+          if (action === "add-lesson-prompt") {
+            const id = btn.getAttribute("data-id");
+            const t = prompt("Lesson title:");
+            if (!t) return;
+            const v = prompt("Video URL (optional):");
+            quickAddLesson(id, t, v || "");
+          }
+          if (action === "remove-lesson") {
+            const sid = btn.getAttribute("data-section");
+            const lid = btn.getAttribute("data-lesson");
+            if (confirm("Delete this lesson?")) removeLesson(sid, lid);
+          }
+          if (action === "download-file") {
+            const sid = btn.getAttribute("data-section");
+            const lid = btn.getAttribute("data-lesson");
+            downloadFileStub(sid, lid);
+          }
+          if (action === "delete-live") {
+            const sid = btn.getAttribute("data-section");
+            const liveId = btn.getAttribute("data-live");
+            deleteLive(sid, liveId);
+          }
+        };
+      });
+    }
+
+    // Helpers for sections/lives/lessons
+    function removeSection(id) {
+      const sections = store.get("sections", []);
+      store.set("sections", sections.filter(s => s.id !== id));
+      syncSectionSelects(); renderSections();
+    }
+
+    function quickAddLesson(sectionId, title, video) {
+      const sections = store.get("sections", []);
+      const s = sections.find(x => x.id === sectionId);
+      if (!s) return;
+      s.lessons.push({ id: crypto.randomUUID(), title, video, notes: "", file: null });
+      store.set("sections", sections);
+      renderSections();
+    }
+
+    function removeLesson(sectionId, lessonId) {
+      const sections = store.get("sections", []);
+      const s = sections.find(x => x.id === sectionId);
+      if (!s) return;
+      s.lessons = s.lessons.filter(l => l.id !== lessonId);
+      store.set("sections", sections);
+      renderSections();
+    }
+
+    function deleteLive(sectionId, liveId) {
+      const sections = store.get("sections", []);
+      const s = sections.find(x => x.id === sectionId);
+      if (!s) return;
+      s.lives = (s.lives || []).filter(l => l.id !== liveId);
+      store.set("sections", sections);
+      renderSections();
+    }
+
+    function downloadFileStub(sectionId, lessonId) {
+      const sections = store.get("sections", []);
+      const s = sections.find(x => x.id === sectionId);
+      if (!s) return;
+      const lesson = s.lessons.find(l => l.id === lessonId);
+      if (!lesson || !lesson.file) { alert("No file attached."); return; }
+      // If base64 content was stored, we could trigger a download here.
+      alert(`File attached: ${lesson.file.name} (${lesson.file.type}). For real downloads, host the file and store its URL.`);
+    }
+
+    // UI utilities
+    function embedVideo(url) {
+      if (!url) return "";
+      try {
+        const u = new URL(url);
+        // YouTube share link -> embed
+        if (u.hostname.includes("youtube.com") || u.hostname.includes("youtu.be")) {
+          const vid = extractYouTubeId(url);
+          return vid ? `<iframe src="https://www.youtube.com/embed/${vid}" allowfullscreen></iframe>` : "";
+        }
+        // Jitsi iframe
+        if (u.hostname.includes("meet.jit.si")) {
+          return `<iframe src="${escapeAttr(url)}" allow="camera; microphone; fullscreen"></iframe>`;
+        }
+        // Google Drive preview links
+        if (u.hostname.includes("drive.google.com")) {
+          return `<iframe src="${escapeAttr(url)}"></iframe>`;
+        }
+        // MP4 direct links
+        if (url.endsWith(".mp4")) {
+          return `<video controls src="${escapeAttr(url)}"></video>`;
+        }
+        // Fallback: no inline embed; user can open link
+        return "";
+      } catch { return ""; }
+    }
+
+    function extractYouTubeId(url) {
+      try {
+        const u = new URL(url);
+        if (u.hostname.includes("youtu.be")) return u.pathname.slice(1);
+        if (u.searchParams.get("v")) return u.searchParams.get("v");
+        const parts = u.pathname.split("/");
+        const idx = parts.indexOf("embed");
+        if (idx !== -1 && parts[idx+1]) return parts[idx+1];
+        return null;
+      } catch { return null; }
+    }
+
+    function escapeHtml(s) {
+      return String(s || "").replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    }
+    function escapeAttr(s) { return escapeHtml(s).replace(/"/g, '&quot;'); }
+
+    function formatCountdown(ms) {
+      const sec = Math.floor(ms/1000);
+      const d = Math.floor(sec/86400);
+      const h = Math.floor((sec%86400)/3600);
+      const m = Math.floor((sec%3600)/60);
+      const s = sec%60;
+      return `Starts in ${d}d ${h}h ${m}m ${s}s`;
+    }
+
+    function syncSectionSelects() {
+      const sections = store.get("sections", []);
+      const opts = sections.map(s => `<option value="${s.id}">${escapeHtml(s.title)}</option>`).join("");
+      el.lessonSection.innerHTML = opts;
+      el.liveSection.innerHTML = opts;
+    }
+
+    function render() {
+      const session = store.get("session", { email: null });
+      const loggedIn = !!session.email;
+      const user = loggedIn ? getUser(session.email) : null;
+      const role = loggedIn && isAdmin(session.email) ? "admin" : "student";
+
+      el.userStatus.textContent = loggedIn ? (role === "admin" ? "Admin" : "Student") : "Guest";
+      el.authSection.classList.toggle("hidden", loggedIn);
+      el.appSection.classList.toggle("hidden", !loggedIn);
+      el.announcementsCard.classList.toggle("hidden", store.get("announcements", []).length === 0);
+
+      if (loggedIn && user) {
+        el.currentUserName.textContent = user.name;
+        el.currentUserRole.textContent = role;
+        el.adminPanel.classList.toggle("hidden", role !== "admin");
+      } else {
+        el.currentUserName.textContent = "-";
+        el.currentUserRole.textContent = "student";
+        el.adminPanel.classList.add("hidden");
+      }
+
+      syncSectionSelects();
+      renderAnnouncements();
+      renderSections();
+    }
+
+    // Events
+    el.btnSignUp.onclick = signUp;
+    el.btnLogin.onclick = login;
+    el.btnLogout.onclick = logout;
+    el.btnAddSection.onclick = addSection;
+    el.btnAddLesson.onclick = addLesson;
+    el.btnScheduleLive.onclick = scheduleLive;
+    el.btnPostAnnouncement.onclick = postAnnouncement;
+
+    // Initial render
+    render();
+  </script>
 </body>
-      </html>
+</html>
