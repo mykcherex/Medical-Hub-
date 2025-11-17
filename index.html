@@ -4,398 +4,207 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Medical Hub — All Health Courses</title>
-  <meta name="description" content="Medical Hub: comprehensive health courses across core, clinical, public health, specialized, allied, and skills." />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
-    :root{
-      /* Vibrant, accessible palette */
-      --bg: #0f1228;
-      --card: #161a38;
-      --text: #f4f7ff;
-      --muted: #cfd6ff;
-      --primary: #7c5cff;      /* purple */
-      --secondary: #00e0b8;    /* teal */
-      --accent: #ff7d7d;       /* coral */
-      --accent2: #ffd166;      /* warm yellow */
-      --accent3: #6ee7ff;      /* sky */
-      --border: #2a2f59;
-      --success: #00d68f;
-      --warning: #ffb020;
+    body {
+      margin:0;
+      font-family:'Poppins', sans-serif;
+      background:linear-gradient(135deg,#ff9a9e,#fad0c4,#fad0c4,#fbc2eb,#a6c1ee);
+      background-size:400% 400%;
+      animation:gradientBG 15s ease infinite;
+      color:#333;
     }
-    *{box-sizing:border-box}
-    html,body{margin:0;padding:0;background:linear-gradient(180deg,#0b0e20 0%, #0f1228 40%, #121538 100%);color:var(--text);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif}
-    a{color:var(--accent2);text-decoration:none}
-    a:hover{text-decoration:underline}
-    .container{max-width:1100px;margin:0 auto;padding:16px}
-    header{
-      position:sticky;top:0;z-index:50;
-      background:rgba(15,18,40,0.75);backdrop-filter:blur(10px);
-      border-bottom:1px solid var(--border);
+    @keyframes gradientBG {
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
     }
-    .nav{
-      display:flex;align-items:center;gap:12px;justify-content:space-between;padding:12px 16px;
+    header {
+      background:linear-gradient(90deg,#ff6a00,#ee0979);
+      padding:15px;
+      text-align:center;
+      color:#fff;
+      font-size:24px;
+      font-weight:bold;
+      box-shadow:0 4px 10px rgba(0,0,0,0.3);
     }
-    .brand{
-      display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:0.5px
+    .btn {
+      padding:10px 16px;
+      border-radius:25px;
+      border:none;
+      cursor:pointer;
+      font-weight:bold;
+      transition:all 0.3s ease;
     }
-    .logo{
-      width:36px;height:36px;border-radius:10px;
-      background:conic-gradient(from 180deg,var(--primary),var(--accent),var(--secondary),var(--accent2),var(--primary));
-      box-shadow:0 0 24px rgba(124,92,255,0.45)
+    .btn-primary {
+      background:linear-gradient(135deg,#ff6a00,#ee0979);
+      color:#fff;
     }
-    .tag{font-size:12px;color:var(--muted);border:1px solid var(--border);padding:4px 8px;border-radius:999px}
-    .actions{display:flex;gap:8px}
-    .btn{
-      border:1px solid var(--border);color:var(--text);background:var(--card);
-      padding:8px 12px;border-radius:10px;font-weight:600;cursor:pointer
+    .btn-primary:hover {
+      transform:scale(1.05);
+      box-shadow:0 4px 12px rgba(0,0,0,0.3);
     }
-    .btn-primary{background:linear-gradient(135deg,var(--primary),var(--secondary));border:none}
-    .hero{
-      padding:24px 16px 8px;display:grid;grid-template-columns:1.2fr 0.8fr;gap:20px
+    .card {
+      background:#fff;
+      padding:20px;
+      margin:16px;
+      border-radius:20px;
+      box-shadow:0 6px 15px rgba(0,0,0,0.2);
+      transition:transform 0.3s ease;
     }
-    @media (max-width:920px){.hero{grid-template-columns:1fr}}
-    .hero-card{
-      background:linear-gradient(180deg,rgba(124,92,255,0.14),rgba(0,224,184,0.12));
-      border:1px solid var(--border);border-radius:16px;padding:24px
+    .card:hover {
+      transform:translateY(-5px);
     }
-    h1{margin:0 0 8px;font-size:28px}
-    .subtitle{color:var(--muted)}
-    .hero-stats{display:flex;gap:12px;margin-top:14px;flex-wrap:wrap}
-    .chip{
-      display:flex;align-items:center;gap:8px;border:1px solid var(--border);padding:8px 10px;border-radius:999px;background:rgba(22,26,56,0.6)
+    .card h3 {
+      margin-top:0;
+      font-size:20px;
+      background:linear-gradient(90deg,#ff6a00,#ee0979);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
     }
-    .search-wrap{display:flex;gap:8px;margin-top:16px}
-    .search{flex:1;padding:12px 14px;border-radius:12px;border:1px solid var(--border);background:rgba(22,26,56,0.6);color:var(--text)}
-    .filters{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
-    .filter{border:1px solid var(--border);background:rgba(22,26,56,0.6);padding:8px 10px;border-radius:999px;cursor:pointer}
-    .highlight{
-      background:linear-gradient(135deg,rgba(255,125,125,0.18),rgba(255,209,102,0.18));
-      border:1px dashed var(--border);border-radius:16px;padding:16px
+    .link-btn {
+      display:inline-block;
+      padding:10px 14px;
+      border-radius:20px;
+      background:linear-gradient(135deg,#43cea2,#185a9d);
+      color:#fff;
+      margin-top:10px;
+      text-decoration:none;
+      font-weight:bold;
+      transition:all 0.3s ease;
     }
-    .grid{
-      display:grid;gap:14px;margin-top:18px;
-      grid-template-columns:repeat(4,1fr)
+    .link-btn:hover {
+      transform:scale(1.05);
+      box-shadow:0 4px 12px rgba(0,0,0,0.3);
     }
-    @media (max-width:1100px){.grid{grid-template-columns:repeat(3,1fr)}}
-    @media (max-width:780px){.grid{grid-template-columns:repeat(2,1fr)}}
-    @media (max-width:520px){.grid{grid-template-columns:1fr}}
-    .card{
-      background:linear-gradient(180deg,rgba(22,26,56,0.8),rgba(22,26,56,0.7));
-      border:1px solid var(--border);border-radius:14px;padding:14px;min-height:120px;display:flex;flex-direction:column;gap:8px
+    footer {
+      background:linear-gradient(90deg,#43cea2,#185a9d);
+      padding:15px;
+      text-align:center;
+      color:#fff;
+      margin-top:30px;
     }
-    .card h3{margin:0;font-size:18px}
-    .badges{display:flex;gap:6px;flex-wrap:wrap}
-    .badge{
-      font-size:12px;padding:6px 8px;border-radius:999px;border:1px solid var(--border);
-      background:rgba(124,92,255,0.15)
+    /* Sign-in modal */
+    #signinModal {
+      display:none;
+      position:fixed;
+      top:0;left:0;width:100%;height:100%;
+      background:rgba(0,0,0,0.7);
+      z-index:999;
+      align-items:center;
+      justify-content:center;
     }
-    .cta-row{display:flex;gap:8px;margin-top:auto}
-    .link-btn{
-      display:inline-flex;align-items:center;gap:8px;padding:8px 10px;border-radius:10px;
-      border:1px solid var(--border);background:rgba(22,26,56,0.6);color:var(--text)
+    #signinModal .box {
+      background:#fff;
+      padding:20px;
+      border-radius:20px;
+      max-width:400px;
+      width:90%;
+      color:#333;
+      box-shadow:0 6px 15px rgba(0,0,0,0.3);
     }
-    .link-btn.primary{background:linear-gradient(135deg,var(--primary),var(--accent));border:none}
-    .accordion{margin-top:10px;border-top:1px dashed var(--border);padding-top:10px}
-    details{border:1px solid var(--border);border-radius:12px;padding:10px;background:rgba(22,26,56,0.5)}
-    summary{cursor:pointer;font-weight:600}
-    .list{margin:10px 0 0;padding-left:18px}
-    footer{
-      margin-top:26px;padding:18px 16px;border-top:1px solid var(--border);
-      background:rgba(15,18,40,0.6)
+    #signinModal input {
+      width:100%;
+      margin-bottom:10px;
+      padding:10px;
+      border-radius:12px;
+      border:1px solid #ccc;
     }
-    .socials{display:flex;gap:12px;flex-wrap:wrap}
-    .kicker{color:var(--muted);font-size:12px}
-    .amharic{font-weight:600;color:var(--accent3)}
-    /* simple watermark preview style for premium notes */
-    .watermark{position:relative}
-    .watermark::after{
-      content:"Medical Hub • Premium";
-      position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-      color:rgba(255,255,255,0.08);font-size:40px;font-weight:800;pointer-events:none
+    #signinModal button {
+      width:100%;
+      padding:12px;
+      border:none;
+      border-radius:25px;
+      background:linear-gradient(135deg,#ff6a00,#ee0979);
+      color:#fff;
+      font-weight:bold;
+      cursor:pointer;
     }
-    /* hide elements if filtered */
-    .hide{display:none !important}
   </style>
 </head>
 <body>
   <header>
-    <div class="nav container">
-      <div class="brand">
-        <div class="logo" aria-hidden="true"></div>
-        <div>Medical Hub</div>
-        <span class="tag">Branding-free • Mobile-first</span>
-      </div>
-      <div class="actions">
-        <button class="btn" id="toggleAmh">Amharic</button>
-        <a class="btn btn-primary" href="#all-courses">Browse all courses</a>
-      </div>
-    </div>
+    Medical Hub — Vibrant Learning
+    <button class="btn btn-primary" id="signinBtn">Sign In</button>
   </header>
 
-  <main class="container">
-    <section class="hero">
-      <div class="hero-card">
-        <h1>All health courses in one place</h1>
-        <p class="subtitle">Core, clinical, public health, specialized, allied, and skills—organized for instant access and admin-friendly uploads.</p>
+  <!-- Sign-in Modal -->
+  <div id="signinModal">
+    <div class="box">
+      <h2>Sign In</h2>
+      <input id="nameInput" type="text" placeholder="Your name">
+      <input id="emailInput" type="email" placeholder="Your email">
+      <button id="submitSignin">Submit</button>
+    </div>
+  </div>
 
-        <div class="hero-stats">
-          <div class="chip">Core Sciences</div>
-          <div class="chip">Clinical Subjects</div>
-          <div class="chip">Public Health</div>
-          <div class="chip">Specialized Fields</div>
-          <div class="chip">Allied & Modern</div>
-          <div class="chip">Skills & Practicals</div>
-        </div>
+  <main>
+    <div class="card">
+      <h3>🏥 Anatomy አናቶሚ</h3>
+      <p>Lectures & Live: Gross anatomy, Neuroanatomy</p>
+      <a class="link-btn primary" href="#">Open course</a>
+      <a class="link-btn uploadBtn" href="#">Upload</a>
+    </div>
+    <div class="card">
+      <h3>👩‍⚕️ Physiology ፊዚዮሎጂ</h3>
+      <p>Lectures & Live: ECG, Renal, Respiratory</p>
+      <a class="link-btn primary" href="#">Open course</a>
+      <a class="link-btn uploadBtn" href="#">Upload</a>
+    </div>
+    <!-- Add more colorful course cards here -->
+  </main>
 
-        <div class="search-wrap">
-          <input id="search" class="search" type="search" placeholder="Search courses (e.g., Cardiology, Anatomy, CPR)..." />
-          <button class="btn btn-primary" id="clearSearch">Clear</button>
-        </div>
-        <div class="filters">
-          <button class="filter" data-filter="Core">Core</button>
-          <button class="filter" data-filter="Clinical">Clinical</button>
-          <button class="filter" data-filter="Public">Public</button>
-          <button class="filter" data-filter="Specialized">Specialized</button>
-          <button class="filter" data-filter="Allied">Allied</button>
-          <button class="filter" data-filter="Skills">Skills</button>
-          <button class="filter" data-filter="All">All</button>
-        </div>
-      </div>
+  <footer>
+    © Medical Hub. Built for accessible education. Addis Ababa, Ethiopia.
+  </footer>
 
-      <div class="hero-card highlight watermark">
-        <h2 style="margin:0 0 8px">Admin quick actions</h2>
-        <ul class="list">
-          <li><strong>Upload:</strong> Add PDFs, PPTs, videos, and links per course folder.</li>
-          <li><strong>Premium notes:</strong> Use custom extensions or zipped files; watermark preview shown here.</li>
-          <li><strong>Live classes:</strong> Paste meeting links under each course’s “Lectures & Live” section.</li>
-          <li><strong>Amharic labels:</strong> Toggle with the Amharic button for inclusive navigation.</li>
-        </ul>
-      </div>
-    </section>
+  <script>
+    const admins = [
+      "chernetisrael@outlook.com",
+      "chernetisrael66@gmail.com",
+      "chernetisrael344gmail.com"
+    ];
 
-    <section id="all-courses" aria-label="All Courses">
-      <div class="grid" id="courseGrid">
-        <!-- Core Medical Sciences -->
-        <div class="card" data-cat="Core" data-title="Anatomy">
-          <h3>🏥 Anatomy <span class="amharic">አናቶሚ</span></h3>
-          <div class="badges"><span class="badge">Notes</span><span class="badge">Videos</span><span class="badge">Diagrams</span></div>
-          <div class="accordion">
-            <details><summary>Lectures & Live</summary>
-              <ul class="list">
-                <li>Gross anatomy overview</li>
-                <li>Neuroanatomy basics</li>
-                <li>Vascular & lymphatics</li>
-              </ul>
-            </details>
-          </div>
-          <div class="cta-row">
-            <a class="link-btn primary" href="#">Open course</a>
-            <a class="link-btn" href="#">Upload</a>
-          </div>
-        </div>
+    const signinModal = document.getElementById("signinModal");
+    const signinBtn = document.getElementById("signinBtn");
+    const submitSignin = document.getElementById("submitSignin");
+    const nameInput = document.getElementById("nameInput");
+    const emailInput = document.getElementById("emailInput");
 
-        <div class="card" data-cat="Core" data-title="Physiology">
-          <h3>🏥 Physiology <span class="amharic">ፊዚዮሎጂ</span></h3>
-          <div class="badges"><span class="badge">ECG</span><span class="badge">Renal</span><span class="badge">Respiratory</span></div>
-          <div class="accordion">
-            <details><summary>Lectures & Live</summary>
-              <ul class="list">
-                <li>Cardiac cycle & ECG</li>
-                <li>Renal function</li>
-                <li>Pulmonary mechanics</li>
-              </ul>
-            </details>
-          </div>
-          <div class="cta-row">
-            <a class="link-btn primary" href="#">Open course</a>
-            <a class="link-btn" href="#">Upload</a>
-          </div>
-        </div>
+    // Show modal when Sign In button clicked
+    signinBtn.addEventListener("click", () => {
+      signinModal.style.display = "flex";
+    });
 
-        <div class="card" data-cat="Core" data-title="Biochemistry">
-          <h3>🏥 Biochemistry <span class="amharic">ባዮኬሚስትሪ</span></h3>
-          <div class="badges"><span class="badge">Metabolism</span><span class="badge">Genetics</span></div>
-          <div class="accordion">
-            <details><summary>Lectures & Live</summary>
-              <ul class="list">
-                <li>Carbohydrate metabolism</li>
-                <li>Protein structure</li>
-                <li>Molecular biology</li>
-              </ul>
-            </details>
-          </div>
-          <div class="cta-row">
-            <a class="link-btn primary" href="#">Open course</a>
-            <a class="link-btn" href="#">Upload</a>
-          </div>
-        </div>
+    // Check session on load
+    window.addEventListener("load", () => {
+      const user = JSON.parse(localStorage.getItem("medicalHubUser") || "{}");
+      if (user.email) applyUserSession(user);
+    });
 
-        <div class="card" data-cat="Core" data-title="Pathology">
-          <h3>🏥 Pathology <span class="amharic">ፓትሎጂ</span></h3>
-          <div class="badges"><span class="badge">General</span><span class="badge">Systemic</span></div>
-          <div class="accordion">
-            <details><summary>Lectures & Live</summary>
-              <ul class="list">
-                <li>Cell injury & inflammation</li>
-                <li>Neoplasia</li>
-                <li>Systemic pathology</li>
-              </ul>
-            </details>
-          </div>
-          <div class="cta-row">
-            <a class="link-btn primary" href="#">Open course</a>
-            <a class="link-btn" href="#">Upload</a>
-          </div>
-        </div>
+    // Handle sign-in
+    submitSignin.addEventListener("click", () => {
+      const name = nameInput.value.trim();
+      const email = emailInput.value.trim().toLowerCase();
+      if (!name || !email) return alert("Please enter both name and email.");
+      const isAdmin = admins.includes(email);
+      const user = { name, email, isAdmin };
+      localStorage.setItem("medicalHubUser", JSON.stringify(user));
+      signinModal.style.display = "none";
+      applyUserSession(user);
+    });
 
-        <div class="card" data-cat="Core" data-title="Pharmacology">
-          <h3>🏥 Pharmacology <span class="amharic">ፋርማኮሎጂ</span></h3>
-          <div class="badges"><span class="badge">Antibiotics</span><span class="badge">CV Drugs</span></div>
-          <div class="accordion">
-            <details><summary>Lectures & Live</summary>
-              <ul class="list">
-                <li>Autonomics</li>
-                <li>Antimicrobials</li>
-                <li>Cardiovascular pharmacology</li>
-              </ul>
-            </details>
-          </div>
-          <div class="cta-row">
-            <a class="link-btn primary" href="#">Open course</a>
-            <a class="link-btn" href="#">Upload</a>
-          </div>
-        </div>
-
-        <div class="card" data-cat="Core" data-title="Microbiology">
-          <h3>🏥 Microbiology <span class="amharic">ማይክሮባዮሎጂ</span></h3>
-          <div class="badges"><span class="badge">Bacteriology</span><span class="badge">Virology</span><span class="badge">Parasitology</span></div>
-          <div class="accordion">
-            <details><summary>Lectures & Live</summary>
-              <ul class="list">
-                <li>Bacterial pathogens</li>
-                <li>Viruses & immunity</li>
-                <li>Parasitic diseases</li>
-              </ul>
-            </details>
-          </div>
-          <div class="cta-row">
-            <a class="link-btn primary" href="#">Open course</a>
-            <a class="link-btn" href="#">Upload</a>
-          </div>
-        </div>
-
-        <div class="card" data-cat="Core" data-title="Forensic Medicine">
-          <h3>🏥 Forensic medicine <span class="amharic">ፎሬንሲክ ሕክምና</span></h3>
-          <div class="badges"><span class="badge">Toxicology</span><span class="badge">Legal</span></div>
-          <div class="accordion">
-            <details><summary>Lectures & Live</summary>
-              <ul class="list">
-                <li>Medico-legal aspects</li>
-                <li>Injury analysis</li>
-                <li>Toxicology</li>
-              </ul>
-            </details>
-          </div>
-          <div class="cta-row">
-            <a class="link-btn primary" href="#">Open course</a>
-            <a class="link-btn" href="#">Upload</a>
-          </div>
-        </div>
-
-        <!-- Clinical Subjects -->
-        <div class="card" data-cat="Clinical" data-title="General Medicine">
-          <h3>👩‍⚕️ General medicine <span class="amharic">አጠቃላይ ሕክምና</span></h3>
-          <div class="badges"><span class="badge">IM</span><span class="badge">Diagnostics</span></div>
-          <div class="accordion">
-            <details><summary>Lectures & Live</summary>
-              <ul class="list"><li>Approach to fever</li><li>Hypertension & diabetes</li><li>ECG clinic</li></ul>
-            </details>
-          </div>
-          <div class="cta-row"><a class="link-btn primary" href="#">Open course</a><a class="link-btn" href="#">Upload</a></div>
-        </div>
-
-        <div class="card" data-cat="Clinical" data-title="General Surgery">
-          <h3>👩‍⚕️ General surgery <span class="amharic">አጠቃላይ ቀዶ ሕክምና</span></h3>
-          <div class="badges"><span class="badge">Ops</span><span class="badge">Wounds</span></div>
-          <div class="accordion">
-            <details><summary>Lectures & Live</summary><ul class="list"><li>Sterilization</li><li>Abdominal surgery</li><li>Trauma basics</li></ul></details>
-          </div>
-          <div class="cta-row"><a class="link-btn primary" href="#">Open course</a><a class="link-btn" href="#">Upload</a></div>
-        </div>
-
-        <div class="card" data-cat="Clinical" data-title="Pediatrics">
-          <h3>👩‍⚕️ Pediatrics <span class="amharic">የህፃናት ሕክምና</span></h3>
-          <div class="badges"><span class="badge">Neonatology</span><span class="badge">Vaccines</span></div>
-          <div class="accordion">
-            <details><summary>Lectures & Live</summary><ul class="list"><li>Neonatal resuscitation</li><li>Growth charts</li><li>Immunization schedule</li></ul></details>
-          </div>
-          <div class="cta-row"><a class="link-btn primary" href="#">Open course</a><a class="link-btn" href="#">Upload</a></div>
-        </div>
-
-        <div class="card" data-cat="Clinical" data-title="Obstetrics & Gynecology">
-          <h3>👩‍⚕️ Obstetrics & gynecology <span class="amharic">የእርግዝና እና የሴቶች ጤና</span></h3>
-          <div class="badges"><span class="badge">OB</span><span class="badge">Gyn</span></div>
-          <div class="accordion">
-            <details><summary>Lectures & Live</summary><ul class="list"><li>ANC protocols</li><li>Labor management</li><li>Gynecologic cancers</li></ul></details>
-          </div>
-          <div class="cta-row"><a class="link-btn primary" href="#">Open course</a><a class="link-btn" href="#">Upload</a></div>
-        </div>
-
-        <div class="card" data-cat="Clinical" data-title="Orthopedics">
-          <h3>👩‍⚕️ Orthopedics <span class="amharic">ኦርቶፔዲክስ</span></h3>
-          <div class="badges"><span class="badge">Fractures</span><span class="badge">Joints</span></div>
-          <div class="accordion">
-            <details><summary>Lectures & Live</summary><ul class="list"><li>Fracture management</li><li>Arthritis</li><li>Spine basics</li></ul></details>
-          </div>
-          <div class="cta-row"><a class="link-btn primary" href="#">Open course</a><a class="link-btn" href="#">Upload</a></div>
-        </div>
-
-        <div class="card" data-cat="Clinical" data-title="Dermatology">
-          <h3>👩‍⚕️ Dermatology <span class="amharic">ደርማቶሎጂ</span></h3>
-          <div class="badges"><span class="badge">Lesions</span><span class="badge">Infections</span></div>
-          <div class="accordion">
-            <details><summary>Lectures & Live</summary><ul class="list"><li>Dermatitis</li><li>Acne & rosacea</li><li>Fungal skin diseases</li></ul></details>
-          </div>
-          <div class="cta-row"><a class="link-btn primary" href="#">Open course</a><a class="link-btn" href="#">Upload</a></div>
-        </div>
-
-        <div class="card" data-cat="Clinical" data-title="Ophthalmology">
-          <h3>👩‍⚕️ Ophthalmology <span class="amharic">ኦፍታልሞሎጂ</span></h3>
-          <div class="badges"><span class="badge">Refraction</span><span class="badge">Glaucoma</span></div>
-          <div class="accordion">
-            <details><summary>Lectures & Live</summary><ul class="list"><li>Eye exam</li><li>Glaucoma essentials</li><li>Cataract updates</li></ul></details>
-          </div>
-          <div class="cta-row"><a class="link-btn primary" href="#">Open course</a><a class="link-btn" href="#">Upload</a></div>
-        </div>
-
-        <div class="card" data-cat="Clinical" data-title="ENT">
-          <h3>👩‍⚕️ ENT <span class="amharic">ኢኤንቲ</span></h3>
-          <div class="badges"><span class="badge">Ear</span><span class="badge">Nose</span><span class="badge">Throat</span></div>
-          <div class="accordion">
-            <details><summary>Lectures & Live</summary><ul class="list"><li>Otitis media</li><li>Sinusitis</li><li>Tonsillitis</li></ul></details>
-          </div>
-          <div class="cta-row"><a class="link-btn primary" href="#">Open course</a><a class="link-btn" href="#">Upload</a></div>
-        </div>
-
-        <div class="card" data-cat="Clinical" data-title="Psychiatry">
-          <h3>👩‍⚕️ Psychiatry <span class="amharic">ሳክያትሪ</span></h3>
-          <div class="badges"><span class="badge">Mood</span><span class="badge">Anxiety</span></div>
-          <div class="accordion">
-            <details><summary>Lectures & Live</summary><ul class="list"><li>Depression overview</li><li>Anxiety management</li><li>Psychosis basics</li></ul></details>
-          </div>
-          <div class="cta-row"><a class="link-btn primary" href="#">Open course</a><a class="link-btn" href="#">Upload</a></div>
-        </div>
-
-        <div class="card" data-cat="Clinical" data-title="Radiology">
-          <h3>👩‍⚕️ Radiology <span class="amharic">ራዲዮሎጂ</span></h3>
-          <div class="badges"><span class="badge">X-ray</span><span class="badge">CT/MRI</span></div>
-          <div class="accordion">
-            <details><summary>Lectures & Live</summary><ul class="list"><li>Chest X-ray reading</li><li>CT interpretation</li><li>MRI basics</li></ul></details>
-          </div>
-          <div class="cta-row"><a class="link-btn primary" href="#">Open course</a><a class="link-btn" href="#">Upload</a></div>
-        </div>
-
-        <div class="card" data-cat="Clinical" data-title="Anesthesiology">
-          <h3>👩‍⚕
+    // Apply session logic
+    function applyUserSession(user) {
+      document.querySelectorAll(".uploadBtn").forEach(btn => {
+        btn.style.display = user.isAdmin ? "inline-block" : "none";
+      });
+      document.querySelectorAll(".link-btn.primary").forEach(btn => {
+        btn.textContent = user.isAdmin ? "Open course (Admin)" : "Open course";
+      });
+      signinBtn.textContent = "Signed in as " + user.name;
+      signinBtn.disabled = true;
+    }
+  </script>
+</body>
+  </html>
+  
