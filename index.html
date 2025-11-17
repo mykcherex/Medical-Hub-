@@ -3,12 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Medical Hub - Your Vibrant Medical Learning Companion</title>
+    <title>Medical Hub - The Ethiopian Medical Learning Platform</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
+
+    <div class="ethiopia-banner">
+        <span class="flag-icon">🇪🇹</span> **Medical Hub: Learning Empowered by Ethiopia** <span class="flag-icon">🇪🇹</span>
+    </div>
 
     <header>
         <div class="container header-content">
@@ -17,254 +21,81 @@
             </div>
             <nav>
                 <ul class="nav-links">
-                    <li><a href="#courses"><i class="fas fa-book-medical"></i> Courses</a></li>
+                    <li><a href="#courses" id="nav-courses"><i class="fas fa-book-medical"></i> Courses</a></li>
                     <li><a href="#notes"><i class="fas fa-sticky-note"></i> Notes</a></li>
-                    <li><a href="#books"><i class="fas fa-atlas"></i> Books</a></li>
-                    <li><a href="#exams"><i class="fas fa-clipboard-list"></i> Exams</a></li>
                     <li><a href="#quizzes"><i class="fas fa-question-circle"></i> Quizzes</a></li>
-                    <li><a href="#profile" class="btn-primary"><i class="fas fa-user-circle"></i> Login / Register</a></li>
+                    <li><button id="auth-button" class="btn-primary" onclick="handleAuthClick()"></button></li>
                 </ul>
             </nav>
-            <div class="hamburger">
-                <i class="fas fa-bars"></i>
-            </div>
+            <div class="hamburger"><i class="fas fa-bars"></i></div>
         </div>
     </header>
     
     <main>
+
         <section id="hero" class="hero-section">
-            <div class="container">
-                <div class="hero-text">
-                    <h1>Unlock Your Medical Potential with Medical Hub!</h1>
-                    <p>Dive into a world of vibrant learning – comprehensive health courses, notes, books, exams, and quizzes, all designed for your success.</p>
-                    <a href="#courses" class="btn-secondary">Start Your Journey Today <i class="fas fa-arrow-right"></i></a>
-                </div>
-                <div class="hero-image">
-                    </div>
+            <div class="container hero-text">
+                <h1>Ethiopia’s Premier Digital Medical Education Platform!</h1>
+                <p>Access high-quality health courses, exams, and materials. **Login or register to unlock all content.**</p>
+                <button class="btn-secondary" onclick="document.getElementById('auth-modal').style.display='flex';">Start Your Free Trial <i class="fas fa-arrow-right"></i></button>
             </div>
         </section>
 
-        <section id="features" class="features-grid container">
-            <div class="feature-card">
-                <i class="fas fa-video icon-large"></i>
-                <h3>Interactive Courses</h3>
-                <p>Engaging video lectures and practical sessions.</p>
-            </div>
-            <div class="feature-card">
-                <i class="fas fa-mobile-alt icon-large"></i>
-                <h3>Learn On-the-Go</h3>
-                <p>Access content anytime, anywhere on any device.</p>
-            </div>
-            <div class="feature-card">
-                <i class="fas fa-user-friends icon-large"></i>
-                <h3>Expert Mentorship</h3>
-                <p>Guidance from experienced medical professionals.</p>
-            </div>
-            <div class="feature-card">
-                <i class="fas fa-graduation-cap icon-large"></i>
-                <h3>Certification</h3>
-                <p>Earn certificates upon course completion.</p>
-            </div>
-        </section>
-
-        <section id="courses" class="courses-section container">
-            <h2><i class="fas fa-book-medical"></i> Explore Our Health Courses</h2>
-            <p class="section-tagline">From foundational concepts to advanced clinical insights.</p>
+        <section id="courses" class="courses-section container protected-content">
+            <h2><i class="fas fa-lock-open"></i> Your Available Courses</h2>
+            <p class="section-tagline">Comprehensive modules covering local and international medical curricula.</p>
             <div class="course-cards-grid">
-                <div class="course-card">
-                    <img src="https://via.placeholder.com/300x200/FFD700/000000?text=Anatomy" alt="Human Anatomy Course">
-                    <h4>Human Anatomy & Physiology</h4>
-                    <p>Master the structures and functions of the human body.</p>
-                    <div class="course-meta">
-                        <span><i class="fas fa-layer-group"></i> Beginner</span>
-                        <span><i class="fas fa-clock"></i> 40 Hrs</span>
-                    </div>
-                    <a href="#" class="btn-outline">View Course <i class="fas fa-arrow-right"></i></a>
-                </div>
-                <div class="course-card">
-                    <img src="https://via.placeholder.com/300x200/98FB98/000000?text=Pharmacology" alt="Pharmacology Course">
-                    <h4>Clinical Pharmacology</h4>
-                    <p>Understanding drug mechanisms, dosages, and interactions.</p>
-                    <div class="course-meta">
-                        <span><i class="fas fa-layer-group"></i> Intermediate</span>
-                        <span><i class="fas fa-clock"></i> 30 Hrs</span>
-                    </div>
-                    <a href="#" class="btn-outline">View Course <i class="fas fa-arrow-right"></i></a>
-                </div>
-                <div class="course-card">
-                    <img src="https://via.placeholder.com/300x200/ADD8E6/000000?text=FirstAid" alt="First Aid Course">
-                    <h4>Emergency First Aid & CPR</h4>
-                    <p>Life-saving skills for critical situations. Certified course.</p>
-                    <div class="course-meta">
-                        <span><i class="fas fa-layer-group"></i> All Levels</span>
-                        <span><i class="fas fa-clock"></i> 15 Hrs</span>
-                    </div>
-                    <a href="#" class="btn-outline">View Course <i class="fas fa-arrow-right"></i></a>
-                </div>
-                <div class="course-card">
-                    <img src="https://via.placeholder.com/300x200/FF6347/000000?text=Pathology" alt="Pathology Course">
-                    <h4>Introduction to Pathology</h4>
-                    <p>Explore disease processes, causes, and effects on the body.</p>
-                    <div class="course-meta">
-                        <span><i class="fas fa-layer-group"></i> Intermediate</span>
-                        <span><i class="fas fa-clock"></i> 25 Hrs</span>
-                    </div>
-                    <a href="#" class="btn-outline">View Course <i class="fas fa-arrow-right"></i></a>
-                </div>
+                <div class="course-card"><h4>Ethiopian Public Health System</h4><p>Focus on local disease patterns and community medicine.</p><a href="#">Start Course</a></div>
+                <div class="course-card"><h4>Clinical Anatomy 101</h4><p>Detailed study of human structure with case integration.</p><a href="#">Start Course</a></div>
+                <div class="course-card"><h4>Pharmacology & Therapeutics</h4><p>Drug mechanisms, dosages, and interactions.</p><a href="#">Start Course</a></div>
+                <div class="course-card"><h4>Emergency First Aid & CPR</h4><p>Certified life-saving techniques and protocols.</p><a href="#">Start Course</a></div>
             </div>
         </section>
-
-        <section id="notes" class="content-section container">
-            <h2><i class="fas fa-sticky-note"></i> Essential Medical Notes</h2>
-            <p class="section-tagline">Concise summaries, mind maps, and quick revisions for all subjects.</p>
-            <div class="content-grid">
-                <div class="content-card">
-                    <h4>Cardiology Quick Notes</h4>
-                    <p>Key concepts of heart anatomy, physiology, and common diseases.</p>
-                    <a href="#" class="btn-text">Download PDF <i class="fas fa-download"></i></a>
-                </div>
-                <div class="content-card">
-                    <h4>Pharmacology Drug Index</h4>
-                    <p>A searchable index of common drugs and their uses.</p>
-                    <a href="#" class="btn-text">View Notes <i class="fas fa-arrow-right"></i></a>
-                </div>
-                <div class="content-card">
-                    <h4>Anatomy Flashcards</h4>
-                    <p>Visual aids for memorizing muscles, bones, and organs.</p>
-                    <a href="#" class="btn-text">Explore Flashcards <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </div>
+        
+        <section id="admin" class="content-section container protected-content">
+            <h2><i class="fas fa-cloud-upload-alt"></i> Admin/Educator: Upload Materials</h2>
+            <p class="section-tagline">Upload new lecture notes, exam papers, or e-books for students.</p>
+            <form id="upload-form" class="upload-form" onsubmit="alert('File upload requires a secure server/database connection (BACKEND).'); return false;">
+                <input type="text" placeholder="Material Title (e.g., Immunology Notes)" required>
+                <input type="file" required>
+                <button type="submit" class="btn-primary">Securely Upload Material</button>
+            </form>
         </section>
-
-        <section id="books" class="content-section container">
-            <h2><i class="fas fa-atlas"></i> Digital Medical Library</h2>
-            <p class="section-tagline">Access a vast collection of e-books and reference materials.</p>
-            <div class="content-grid">
-                <div class="content-card">
-                    <h4>Gray's Anatomy (Digital Edition)</h4>
-                    <p>The classic comprehensive guide to human anatomy.</p>
-                    <a href="#" class="btn-text">Read Book <i class="fas fa-book-open"></i></a>
-                </div>
-                <div class="content-card">
-                    <h4>Robbins Basic Pathology</h4>
-                    <p>Foundational text for understanding disease mechanisms.</p>
-                    <a href="#" class="btn-text">Read Book <i class="fas fa-book-open"></i></a>
-                </div>
-                <div class="content-card">
-                    <h4>Harrison's Principles of Internal Medicine</h4>
-                    <p>A leading textbook on clinical medicine.</p>
-                    <a href="#" class="btn-text">Read Book <i class="fas fa-book-open"></i></a>
-                </div>
-            </div>
-        </section>
-
-        <section id="exams" class="content-section container">
-            <h2><i class="fas fa-clipboard-list"></i> Practice Exams & Mock Tests</h2>
-            <p class="section-tagline">Prepare for your medical examinations with confidence.</p>
-            <div class="content-grid">
-                <div class="content-card">
-                    <h4>NEET PG Mock Test Series</h4>
-                    <p>Simulate exam conditions with timed practice tests.</p>
-                    <a href="#" class="btn-text">Start Exam <i class="fas fa-play-circle"></i></a>
-                </div>
-                <div class="content-card">
-                    <h4>AIIMS MBBS Practice Papers</h4>
-                    <p>Previous year question papers and model solutions.</p>
-                    <a href="#" class="btn-text">Start Exam <i class="fas fa-play-circle"></i></a>
-                </div>
-                <div class="content-card">
-                    <h4>USMLE Step 1 Preparation</h4>
-                    <p>High-yield questions for the critical Step 1 exam.</p>
-                    <a href="#" class="btn-text">Start Exam <i class="fas fa-play-circle"></i></a>
-                </div>
-            </div>
-        </section>
-
-        <section id="quizzes" class="content-section container">
+        
+        <section id="quizzes" class="content-section container protected-content">
             <h2><i class="fas fa-question-circle"></i> Interactive Quizzes</h2>
-            <p class="section-tagline">Test your knowledge and reinforce your learning with fun quizzes.</p>
+            <p class="section-tagline">Test your knowledge immediately after completing a module.</p>
             <div class="content-grid">
-                <div class="content-card">
-                    <h4>Daily Dose: Anatomy Quiz</h4>
-                    <p>Quick 10-question quiz to test your anatomical knowledge.</p>
-                    <a href="#" class="btn-text">Take Quiz <i class="fas fa-arrow-right"></i></a>
-                </div>
-                <div class="content-card">
-                    <h4>Pharmacology Challenge</h4>
-                    <p>Identify drugs, mechanisms, and side effects.</p>
-                    <a href="#" class="btn-text">Take Quiz <i class="fas fa-arrow-right"></i></a>
-                </div>
-                <div class="content-card">
-                    <h4>Medical Terminology Blitz</h4>
-                    <p>Rapid-fire quiz on common medical terms.</p>
-                    <a href="#" class="btn-text">Take Quiz <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </div>
-        </section>
-
-        <section id="cta-bottom" class="cta-section">
-            <div class="container">
-                <h2>Ready to Transform Your Medical Education?</h2>
-                <p>Join thousands of aspiring and current medical professionals on Medical Hub!</p>
-                <a href="#profile" class="btn-secondary">Sign Up Now - It's Free! <i class="fas fa-user-plus"></i></a>
+                <div class="content-card"><h4>Ethiopian Drug Regulation Quiz</h4><a href="#" class="btn-text">Take Quiz <i class="fas fa-arrow-right"></i></a></div>
+                <div class="content-card"><h4>Anatomy Bone Identification</h4><a href="#" class="btn-text">Take Quiz <i class="fas fa-arrow-right"></i></a></div>
+                <div class="content-card"><h4>Pathology Case Study 1</h4><a href="#" class="btn-text">Take Quiz <i class="fas fa-arrow-right"></i></a></div>
             </div>
         </section>
 
     </main>
 
-    <footer>
-        <div class="container footer-content">
-            <div class="footer-logo">
-                <i class="fas fa-stethoscope"></i> Medical Hub
-            </div>
-            <div class="footer-links-group">
-                <h4>Quick Links</h4>
-                <ul>
-                    <li><a href="#courses">Courses</a></li>
-                    <li><a href="#notes">Notes</a></li>
-                    <li><a href="#books">Books</a></li>
-                    <li><a href="#exams">Exams</a></li>
-                    <li><a href="#quizzes">Quizzes</a></li>
-                </ul>
-            </div>
-            <div class="footer-links-group">
-                <h4>About Us</h4>
-                <ul>
-                    <li><a href="#">Our Story</a></li>
-                    <li><a href="#">Mission</a></li>
-                    <li><a href="#">Team</a></li>
-                    <li><a href="#">Careers</a></li>
-                </ul>
-            </div>
-            <div class="footer-links-group">
-                <h4>Support</h4>
-                <ul>
-                    <li><a href="#">FAQ</a></li>
-                    <li><a href="#">Contact Us</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms of Service</a></li>
-                </ul>
-            </div>
-            <div class="social-media">
-                <h4>Connect With Us</h4>
-                <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
-                <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
-                <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-            </div>
+    <div id="auth-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="document.getElementById('auth-modal').style.display='none';">&times;</span>
+            <h2>Welcome to Medical Hub</h2>
+            
+            <form id="login-form">
+                <input type="email" placeholder="Email Address" required>
+                <input type="password" placeholder="Password" required>
+                <button type="submit" class="btn-secondary">Log In</button>
+            </form>
+            
+            <p class="register-link">New Student? <a href="#" onclick="alert('Redirecting to Registration Page (BACKEND REQUIRED).'); return false;">Register Here</a></p>
         </div>
+    </div>
+
+    <footer>
         <div class="container copyright">
-            <p>&copy; 2025 Medical Hub. All rights reserved. Made with <i class="fas fa-heart"></i> in India.</p>
+            <p>&copy; 2025 Medical Hub. Empowering Future Healthcare Professionals. Made with <i class="fas fa-heart"></i> in **Ethiopia** 🇪🇹.</p>
         </div>
     </footer>
 
-    <script>
-        // Basic JavaScript for mobile menu toggle
-        document.querySelector('.hamburger').addEventListener('click', function() {
-            document.querySelector('.nav-links').classList.toggle('active');
-        });
-    </script>
-
+    <script src="script.js"></script>
 </body>
-                                                                         </html>
-                                                                         
+    
+    </html>
